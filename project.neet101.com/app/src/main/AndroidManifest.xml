@@ -48,13 +48,15 @@
         <activity android:name=".SignUpCActivity" />
         <activity android:name=".SignUpDActivity" />
         <activity android:name=".SettingsAActivity">
+
+        </activity>
+        <activity android:name=".SettingsBActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SettingsBActivity"></activity>
     </application>
 
 </manifest>

@@ -9,7 +9,6 @@ import android.widget.LinearLayout;
 
 public class SettingsAActivity extends AppCompatActivity {
 
-
     public LinearLayout btnEnabledA, btnDisabledA;
 
     public LinearLayout btnEnabledB, btnDisabledB;
@@ -18,8 +17,6 @@ public class SettingsAActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings_a);
-
-//        getActionBar().setTitle("Target Settings");
         getSupportActionBar().setTitle("Target Settings");
 
         btnEnabledA = (LinearLayout) findViewById(R.id.btnEnabledA);
@@ -33,8 +30,6 @@ public class SettingsAActivity extends AppCompatActivity {
             public void onClick(View view) {
                 btnDisabledA.setVisibility(View.GONE);
                 btnEnabledA.setVisibility(View.VISIBLE);
-
-                Log.d("Disabled", "YES");
             }
         });
 
@@ -43,8 +38,6 @@ public class SettingsAActivity extends AppCompatActivity {
             public void onClick(View view) {
                 btnEnabledA.setVisibility(View.GONE);
                 btnDisabledA.setVisibility(View.VISIBLE);
-
-                Log.d("Enabled", "YES");
             }
         });
 
@@ -53,8 +46,6 @@ public class SettingsAActivity extends AppCompatActivity {
             public void onClick(View view) {
                 btnDisabledB.setVisibility(View.GONE);
                 btnEnabledB.setVisibility(View.VISIBLE);
-
-                Log.d("Disabled", "YES");
             }
         });
 
@@ -63,8 +54,6 @@ public class SettingsAActivity extends AppCompatActivity {
             public void onClick(View view) {
                 btnEnabledB.setVisibility(View.GONE);
                 btnDisabledB.setVisibility(View.VISIBLE);
-
-                Log.d("Enabled", "YES");
             }
         });
 
