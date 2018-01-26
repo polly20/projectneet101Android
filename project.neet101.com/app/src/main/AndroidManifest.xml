@@ -40,19 +40,21 @@
         <activity
             android:name=".SignUpAActivity"
             android:label="@string/title_activity_sign_up_a"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".SignUpBActivity"
+            android:label="@string/title_activity_sign_up_b"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".SignUpCActivity" />
+        <activity android:name=".SignUpDActivity" />
+        <activity android:name=".SettingsAActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SignUpBActivity"
-            android:label="@string/title_activity_sign_up_b"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".SignUpCActivity" />
-        <activity android:name=".SignUpDActivity"></activity>
+        <activity android:name=".SettingsBActivity"></activity>
     </application>
 
 </manifest>
