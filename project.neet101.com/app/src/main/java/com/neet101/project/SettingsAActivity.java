@@ -1,17 +1,41 @@
 package com.neet101.project;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.content.Context;
+import android.graphics.Color;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
+
+import java.util.Calendar;
+
+
+
+import android.support.v4.app.Fragment; import android.support.v4.app.FragmentActivity; import android.support.v4.app.FragmentManager;
 
 public class SettingsAActivity extends AppCompatActivity {
 
-    public LinearLayout btnEnabledA, btnDisabledA;
+    private DatePicker datePicker;
+    private Calendar calendar;
+    private TextView dateView;
+    private int year, month, day;
 
-    public LinearLayout btnEnabledB, btnDisabledB;
+    public ToggleButton btnToggleA, btnToggleB;
+    public Button btnSetDate;
+
+    public Context myContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,44 +43,76 @@ public class SettingsAActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings_a);
         getSupportActionBar().setTitle("Target Settings");
 
-        btnEnabledA = (LinearLayout) findViewById(R.id.btnEnabledA);
-        btnDisabledA = (LinearLayout) findViewById(R.id.btnDisabledA);
+        myContext = getApplication();
 
-        btnEnabledB = (LinearLayout) findViewById(R.id.btnEnabledB);
-        btnDisabledB = (LinearLayout) findViewById(R.id.btnDisabledB);
-
-        btnDisabledA.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btnDisabledA.setVisibility(View.GONE);
-                btnEnabledA.setVisibility(View.VISIBLE);
+        btnToggleA = (ToggleButton) findViewById(R.id.btnToggleA);
+        btnToggleA.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // TODO Auto-generated method stub
+                if(isChecked) {
+                    buttonView.setTextColor(Color.WHITE);
+                    buttonView.setBackground(ContextCompat.getDrawable(myContext, R.drawable.button_enable_pink));
+                }
+                else
+                {
+                    buttonView.setTextColor(Color.BLACK);
+                    buttonView.setBackground(ContextCompat.getDrawable(myContext, R.drawable.button_enable));
+                }
             }
         });
 
-        btnEnabledA.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btnEnabledA.setVisibility(View.GONE);
-                btnDisabledA.setVisibility(View.VISIBLE);
+        btnToggleB = (ToggleButton) findViewById(R.id.btnToggleB);
+        btnToggleB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // TODO Auto-generated method stub
+                if(isChecked) {
+                    buttonView.setTextColor(Color.WHITE);
+                    buttonView.setBackground(ContextCompat.getDrawable(myContext, R.drawable.button_enable_pink));
+                }
+                else
+                {
+                    buttonView.setTextColor(Color.BLACK);
+                    buttonView.setBackground(ContextCompat.getDrawable(myContext, R.drawable.button_enable));
+                }
             }
         });
 
-        btnDisabledB.setOnClickListener(new View.OnClickListener() {
+        btnSetDate = (Button) findViewById(R.id.btnSetDate);
+        btnSetDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btnDisabledB.setVisibility(View.GONE);
-                btnEnabledB.setVisibility(View.VISIBLE);
+                showDialog(999);
             }
         });
 
-        btnEnabledB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btnEnabledB.setVisibility(View.GONE);
-                btnDisabledB.setVisibility(View.VISIBLE);
-            }
-        });
+    }
 
 
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        // TODO Auto-generated method stub
+        if (id == 999) {
+            return new DatePickerDialog(this,
+                    myDateListener, year, month, day);
+        }
+        return null;
+    }
+
+    private DatePickerDialog.OnDateSetListener myDateListener = new
+            DatePickerDialog.OnDateSetListener() {
+                @Override
+                public void onDateSet(DatePicker arg0,
+                                      int arg1, int arg2, int arg3) {
+                    // TODO Auto-generated method stub
+                    // arg1 = year
+                    // arg2 = month
+                    // arg3 = day
+                    showDate(arg1, arg2+1, arg3);
+                }
+            };
+
+    public void showDate(int year, int month, int day) {
+        dateView.setText(new StringBuilder().append(day).append("/")
+                .append(month).append("/").append(year));
     }
 }
