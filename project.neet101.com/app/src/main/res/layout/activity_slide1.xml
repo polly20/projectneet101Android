@@ -16,18 +16,20 @@ tools:context="com.neet101.project.Slide1Activity">
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="50dp"
         android:layout_alignParentBottom="true"
         android:orientation="vertical">
 
         <Button
             android:id="@+id/btnSkip"
-            android:layout_width="300dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:background="#fff"
-            android:textSize="20dp"
-            android:text="SKIP" />
+            android:padding="10dp"
+            android:fontFamily="@font/comfortaa"
+            android:background="@drawable/btn"
+            android:textColor="#E43556"
+            android:textSize="18dp"
+            android:text="Skip" />
 
     </LinearLayout>
 

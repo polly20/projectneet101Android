@@ -37,18 +37,6 @@ public class SliderLayoutAdapter extends PagerAdapter {
         ImageView mImageView = new ImageView(mContext);
         mImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         mImageView.setImageResource(sliderImagesId[i]);
-
-        if(i == 7) {
-            Slide1Activity.btnSkip.setVisibility(View.GONE);
-        }
-        else {
-            Slide1Activity.btnSkip.setVisibility(View.VISIBLE);
-        }
-
-        String data = sliderImagesId[i] + "";
-
-        Log.d("Position", "" + i + " " + data);
-
         ((ViewPager) container).addView(mImageView, 0);
         return mImageView;
     }

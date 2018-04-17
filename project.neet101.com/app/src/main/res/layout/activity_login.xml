@@ -29,12 +29,36 @@
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="230dp"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/logo"
                 android:layout_gravity="center"
-                />
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/alex_brush"
+                android:text="Welcome"
+                android:textColor="#fff"
+                android:textSize="50dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="-20dp"
+                android:fontFamily="@font/alex_brush"
+                android:text="to"
+                android:textColor="#fff"
+                android:textSize="50dp" />
+
+            <TextView
+                android:layout_width="291dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="-40dp"
+                android:fontFamily="@font/alex_brush"
+                android:padding="20dp"
+                android:text="Neet101"
+                android:textColor="#fff"
+                android:textSize="80dp" />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -94,7 +118,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:background="#FFF"
+                android:background="@drawable/btn"
                 android:textColor="#E43556"
                 android:padding="20dp"
                 android:textSize="20dp"
