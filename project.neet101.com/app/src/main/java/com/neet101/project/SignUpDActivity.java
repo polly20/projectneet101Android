@@ -33,9 +33,9 @@ public class SignUpDActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent i = new Intent(getApplicationContext(), SignUpBActivity.class);
-//                startActivity(i);
-//                finish();
+                Intent i = new Intent(getApplicationContext(), SettingsAActivity.class);
+                startActivity(i);
+                finish();
             }
         });
     }

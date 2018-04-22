@@ -27,50 +27,42 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Slide1Activity" >
+        <activity android:name=".Slide1Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
         <activity android:name=".TargetActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar" >
-
-
-        </activity>
-
-
-
-
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
         <activity
             android:name=".SignUpAActivity"
             android:label="@string/title_activity_sign_up_a"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SignUpBActivity"
             android:label="@string/title_activity_sign_up_b"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SignUpCActivity" />
         <activity android:name=".SignUpDActivity" />
-        <activity android:name=".SettingsAActivity">
-
-        </activity>
-        <activity android:name=".SettingsBActivity">
-
-        </activity>
+        <activity android:name=".SettingsAActivity"></activity>
+        <activity android:name=".SettingsBActivity"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+        <activity android:name=".MessageBoxOk"></activity>
     </application>
 
 </manifest>

@@ -38,10 +38,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginTop="-5dp"
+                        android:layout_marginTop="-10dp"
                         android:text="Sign Up"
                         android:textColor="#FFF"
-                        android:textSize="30dp" />
+                        android:textSize="30dp"
+                        android:fontFamily="@font/comfortaa"/>
                 </LinearLayout>
 
                 <TextView
@@ -52,6 +53,7 @@
                     android:layout_marginRight="0dp"
                     android:layout_marginTop="0dp"
                     android:text="Next"
+                    android:fontFamily="@font/comfortaa"
                     android:textColor="#FFF"
                     android:textSize="20dp"/>
 
@@ -79,7 +81,9 @@
                 android:layout_height="wrap_content"
                 android:hint="Email Address"
                 android:maxLines="1"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:textColor="#fff"
+                android:fontFamily="@font/comfortaa"/>
 
         </android.support.design.widget.TextInputLayout>
 

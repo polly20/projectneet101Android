@@ -19,4 +19,7 @@
     </string>
     <string name="title_activity_sign_up_a">SignUpAActivity</string>
     <string name="title_activity_sign_up_b">SignUpBActivity</string>
+
+    <string name="facebook_app_id">1678043878897352</string>
+    <string name="fb_login_protocol_scheme">fb1678043878897352</string>
 </resources>

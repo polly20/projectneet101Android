@@ -37,8 +37,9 @@ tools:context="com.neet101.project.SignUpCActivity">
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:layout_marginTop="-5dp"
+                    android:layout_marginTop="-10dp"
                     android:text="Sign Up"
+                    android:fontFamily="@font/comfortaa"
                     android:textColor="#FFF"
                     android:textSize="30dp" />
             </LinearLayout>
@@ -51,6 +52,7 @@ tools:context="com.neet101.project.SignUpCActivity">
                 android:layout_marginRight="0dp"
                 android:layout_marginTop="0dp"
                 android:text="Next"
+                android:fontFamily="@font/comfortaa"
                 android:textColor="#FFF"
                 android:textSize="20dp"/>
 
@@ -78,7 +80,9 @@ tools:context="com.neet101.project.SignUpCActivity">
             android:layout_height="wrap_content"
             android:hint="Password"
             android:maxLines="1"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textColor="#fff"
+            android:fontFamily="@font/comfortaa"/>
 
     </android.support.design.widget.TextInputLayout>
 
