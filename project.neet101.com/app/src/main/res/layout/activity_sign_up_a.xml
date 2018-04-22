@@ -76,7 +76,7 @@
             android:layout_height="wrap_content">
 
             <AutoCompleteTextView
-                android:id="@+id/fname"
+                android:id="@+id/txtFname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="First name"
@@ -93,7 +93,7 @@
             android:layout_marginTop="20dp">
 
             <AutoCompleteTextView
-                android:id="@+id/lname"
+                android:id="@+id/txtLname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Last name"

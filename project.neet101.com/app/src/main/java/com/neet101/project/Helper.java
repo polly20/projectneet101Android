@@ -11,7 +11,11 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Helper {
 
@@ -41,29 +45,18 @@ public class Helper {
         mysharedpred.edit().clear().commit();
     }
 
-    public static void dialogBox(Activity activity) {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(activity);
-        alertDialogBuilder.setMessage("Click on Image for tag");
-        alertDialogBuilder.setPositiveButton("Ok",
-        new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface arg0, int arg1) {
-            }
-        });
-
-        alertDialogBuilder.setNegativeButton("cancel",
-        new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface arg0, int arg1) {
-
-            }
-        });
-
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
+    public static boolean IsEmpty(EditText etText) {
+        return etText.getText().toString().trim().length() == 0;
     }
+
+    public static boolean IsEmailValid(EditText email) {
+        String  expression="^[\\w\\-]([\\.\\w])+[\\w]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
+        CharSequence inputStr = email.getText().toString();
+        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(inputStr);
+        return matcher.matches();
+    }
+
 
     public static void MessageBoxOKShow(Activity activity, String caption, String message, int height){
 

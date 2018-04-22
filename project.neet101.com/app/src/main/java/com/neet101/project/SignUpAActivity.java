@@ -20,25 +20,14 @@ public class SignUpAActivity extends AppCompatActivity {
 
     ImageView btnBack;
     TextView btnNext;
-
-    EditText fname, lname;
+    EditText txtFname, txtLname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_a);
 
-        btnBack = (ImageView) findViewById(R.id.btnBack);
-        btnNext = (TextView) findViewById(R.id.btnNext);
-
-        fname = (EditText) findViewById(R.id.fname);
-        lname = (EditText) findViewById(R.id.lname);
-
-        String fn = Helper.Get(SignUpAActivity.this, "fname");
-        String ln = Helper.Get(SignUpAActivity.this, "lname");
-
-        fname.setText(fn);
-        lname.setText(ln);
+        Init();
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,20 +38,18 @@ public class SignUpAActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            String f = fname.getText().toString();
-            String l = lname.getText().toString();
-
-            Log.d("f", f);
-
-            if(f == "") {
+            if(Helper.IsEmpty(txtFname)) {
                 Helper.MessageBoxOKShow(SignUpAActivity.this, "Alert Box", "Please enter your first name.", 750);
                 return;
             }
 
-            if(l == "") {
+            if(Helper.IsEmpty(txtLname)) {
                 Helper.MessageBoxOKShow(SignUpAActivity.this, "Alert Box", "Please enter your last name.", 750);
                 return;
             }
+
+            String f = txtFname.getText().toString();
+            String l = txtLname.getText().toString();
 
             Helper.Put(SignUpAActivity.this, "fname", f);
             Helper.Put(SignUpAActivity.this, "lname", l);
@@ -75,5 +62,18 @@ public class SignUpAActivity extends AppCompatActivity {
 
     }
 
+    public void Init() {
+        btnBack = (ImageView) findViewById(R.id.btnBack);
+        btnNext = (TextView) findViewById(R.id.btnNext);
+
+        txtFname = (EditText) findViewById(R.id.txtFname);
+        txtLname = (EditText) findViewById(R.id.txtLname);
+
+        String fn = Helper.Get(SignUpAActivity.this, "fname");
+        String ln = Helper.Get(SignUpAActivity.this, "lname");
+
+        txtFname.setText(fn);
+        txtLname.setText(ln);
+    }
 
 }

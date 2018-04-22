@@ -75,13 +75,17 @@ tools:context="com.neet101.project.SignUpCActivity">
         android:layout_height="wrap_content">
 
         <AutoCompleteTextView
-            android:id="@+id/password"
+            android:id="@+id/txtPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
+            android:imeActionId="6"
+            android:imeOptions="actionUnspecified"
+            android:inputType="textPassword"
             android:maxLines="1"
             android:singleLine="true"
             android:textColor="#fff"
+            android:imeActionLabel="@string/action_sign_in_short"
             android:fontFamily="@font/comfortaa"/>
 
     </android.support.design.widget.TextInputLayout>
