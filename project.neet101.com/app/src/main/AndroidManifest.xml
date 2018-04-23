@@ -38,7 +38,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
@@ -52,8 +52,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".SignUpCActivity" />
         <activity android:name=".SignUpDActivity" />
-        <activity android:name=".SettingsAActivity"></activity>
-        <activity android:name=".SettingsBActivity"></activity>
+        <activity android:name=".SettingsAActivity" />
+        <activity android:name=".SettingsBActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
@@ -62,7 +62,8 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity android:name=".MessageBoxOk"></activity>
+        <activity android:name=".MessageBoxOk" />
+        <activity android:name=".DashboardActivity"></activity>
     </application>
 
 </manifest>
