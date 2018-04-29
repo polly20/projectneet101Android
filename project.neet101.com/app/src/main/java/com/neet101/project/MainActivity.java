@@ -104,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
         callbackManager = CallbackManager.Factory.create();
 
         btnFBLogin1.setReadPermissions(Arrays.asList(EMAIL));

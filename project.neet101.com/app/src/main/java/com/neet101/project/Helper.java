@@ -56,8 +56,7 @@ public class Helper {
         Matcher matcher = pattern.matcher(inputStr);
         return matcher.matches();
     }
-
-
+    
     public static void MessageBoxOKShow(Activity activity, String caption, String message, int height){
 
         final Dialog dialog = new Dialog(activity);
