@@ -5,6 +5,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +15,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +36,8 @@ import com.facebook.login.widget.LoginButton;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 import org.json.JSONArray;
@@ -80,6 +86,25 @@ public class MainActivity extends AppCompatActivity {
         btnSignUp = (Button) findViewById(R.id.btnSignUp);
         btnFBLogin = (Button) findViewById(R.id.btnFBLogin);
         btnFBLogin1 = (LoginButton) findViewById(R.id.login_button);
+
+
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo(
+                    "com.neet101.project",
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
