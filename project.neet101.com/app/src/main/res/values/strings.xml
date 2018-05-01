@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">project</string>
+    <string name="app_name">Neet101</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
     <string name="title_activity_main">MainActivity</string>
@@ -22,4 +22,7 @@
 
     <string name="facebook_app_id">1678043878897352</string>
     <string name="fb_login_protocol_scheme">fb1678043878897352</string>
+
+    <string name="neet_api_email">king@ambeyo.com</string>
+    <string name="need_api_password">/@QWER12qwer</string>
 </resources>

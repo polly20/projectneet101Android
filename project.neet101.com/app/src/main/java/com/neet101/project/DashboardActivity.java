@@ -38,10 +38,16 @@ public class DashboardActivity extends AppCompatActivity {
         setTitle("Profile");
 
         Bundle inBundle = getIntent().getExtras();
-        firstName = inBundle.getString("name");
-        lastName = inBundle.getString("surname");
-        email = inBundle.getString("email");
-        imageUrl = inBundle.getString("imageUrl");
+
+        String fname = Helper.Get(DashboardActivity.this, "fname");
+        String lname = Helper.Get(DashboardActivity.this, "lname");
+        String emailAddress = Helper.Get(DashboardActivity.this, "email");
+        String facebook_profile = Helper.Get(DashboardActivity.this, "facebook_profile");
+
+        firstName = fname;
+        lastName = lname;
+        email = emailAddress;
+        imageUrl = facebook_profile;
 
         TextView Fullname = (TextView)findViewById(R.id.Fullname);
         Fullname.setText(firstName + " " + lastName);

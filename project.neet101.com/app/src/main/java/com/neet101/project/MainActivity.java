@@ -87,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
         btnFBLogin = (Button) findViewById(R.id.btnFBLogin);
         btnFBLogin1 = (LoginButton) findViewById(R.id.login_button);
 
-
         try {
             PackageInfo info = getPackageManager().getPackageInfo(
                     "com.neet101.project",
@@ -103,8 +102,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-
-
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,13 +161,13 @@ public class MainActivity extends AppCompatActivity {
                             if (object.has("gender"))
                                 gender = object.getString("gender");
 
-                            Intent main = new Intent(MainActivity.this, DashboardActivity.class);
-                            main.putExtra("name",firstName);
-                            main.putExtra("surname",lastName);
-                            main.putExtra("email",email);
-                            main.putExtra("imageUrl",profilePicture.toString());
-                            startActivity(main);
-                            finish();
+                            Helper.Put(MainActivity.this, "facebook_id", userId);
+                            Helper.Put(MainActivity.this, "facebook_profile", profilePicture.toString());
+                            Helper.Put(MainActivity.this, "fname", firstName);
+                            Helper.Put(MainActivity.this, "lname", lastName);
+                            Helper.Put(MainActivity.this, "email", email);
+
+                            new validate_facebook().execute();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -206,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    private class getFacebookInfo extends AsyncTask<Void, Void, Void> {
+    private class validate_facebook extends AsyncTask<Void, Void, String> {
 
         @Override
         protected void onPreExecute() {
@@ -216,40 +213,19 @@ public class MainActivity extends AppCompatActivity {
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
             pDialog.show();
-
         }
 
         @Override
-        protected Void doInBackground(Void... arg0) {
+        protected String doInBackground(Void... arg0) {
+
             HttpHandler sh = new HttpHandler();
 
             // Making a request to url and getting response
-            String jsonStr = sh.makeServiceCall(fb_url, "GET");
-
-            Log.e(TAG, "Response from url: " + jsonStr);
+            String jsonStr = sh.makeServiceCall("http://cpanel.neet101.com/api/login/validation?account=" + email, "POST", _context);
 
             if (jsonStr != null) {
-                try {
-                    JSONObject jsonObj = new JSONObject(jsonStr);
-
-                    // Getting JSON Array node
-                    String name = jsonObj.get("name").toString();
-
-                    Log.d("name", name);
-
-                } catch (final JSONException e) {
-                    Log.e(TAG, "Json parsing error: " + e.getMessage());
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getApplicationContext(),
-                                    "Json parsing error: " + e.getMessage(),
-                                    Toast.LENGTH_LONG)
-                                    .show();
-                        }
-                    });
-
-                }
+                Log.e(TAG, "Response from url: " + jsonStr);
+                return jsonStr;
             } else {
                 Log.e(TAG, "Couldn't get json from server.");
                 runOnUiThread(new Runnable() {
@@ -261,24 +237,60 @@ public class MainActivity extends AppCompatActivity {
                                 .show();
                     }
                 });
-
             }
 
             return null;
         }
 
         @Override
-        protected void onPostExecute(Void result) {
-            super.onPostExecute(result);
+        protected void onPostExecute(String JSON) {
+            super.onPostExecute(JSON);
             // Dismiss the progress dialog
             if (pDialog.isShowing())
                 pDialog.dismiss();
-            /**
-             * Updating parsed JSON data into ListView
-             * */
+
+            try {
+                JSONObject jsonObj = new JSONObject(JSON);
+
+                String status = jsonObj.get("status").toString();
+
+                String result = jsonObj.get("message").toString();
+
+                Log.d("status", status);
+
+                Log.d("result", result);
+
+                Intent main;
+
+                if(Integer.parseInt(status) != 200) {
+                    main = new Intent(MainActivity.this, SignUpAActivity.class);
+                }
+                else {
+                    main = new Intent(MainActivity.this, DashboardActivity.class);
+                }
+
+                startActivity(main);
+                finish();
+
+            } catch (final JSONException e) {
+                Log.e(TAG, "Json parsing error: " + e.getMessage());
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(),
+                                "Json parsing error: " + e.getMessage(),
+                                Toast.LENGTH_LONG)
+                                .show();
+                    }
+                });
+
+            }
+
         }
 
     }
+
+
 
 
 }
