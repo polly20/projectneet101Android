@@ -93,6 +93,22 @@ tools:context="com.neet101.project.SignUpCActivity">
 
 </LinearLayout>
 
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="bottom">
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn"
+        android:textColor="#000"
+        android:textSize="18dp"
+        android:text="NEXT" />
+
+</RelativeLayout>
+
 </RelativeLayout>
 
 

@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,6 +26,8 @@ public class SignUpCActivity extends AppCompatActivity {
     ImageView btnBack;
     TextView btnNext;
 
+    Button btnSubmit;
+
     EditText txtPassword;
     public String data;
 
@@ -35,6 +38,8 @@ public class SignUpCActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         Init();
+
+        _context = getApplicationContext();
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,13 +59,28 @@ public class SignUpCActivity extends AppCompatActivity {
                 }
 
                 String p = txtPassword.getText().toString();
+
                 Helper.Put(SignUpCActivity.this, "password", p);
 
                 Register();
 
-//                Intent i = new Intent(getApplicationContext(), SignUpDActivity.class);
-//                startActivity(i);
-//                finish();
+            }
+        });
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(Helper.IsEmpty(txtPassword)) {
+                    Helper.MessageBoxOKShow(SignUpCActivity.this, "Alert Box", "Please enter your password.", 750);
+                    return;
+                }
+
+                String p = txtPassword.getText().toString();
+
+                Helper.Put(SignUpCActivity.this, "password", p);
+
+                Register();
+
             }
         });
     }
@@ -69,6 +89,7 @@ public class SignUpCActivity extends AppCompatActivity {
         btnBack = (ImageView) findViewById(R.id.btnBack);
         btnNext = (TextView) findViewById(R.id.btnNext);
         txtPassword = (EditText) findViewById(R.id.txtPassword);
+        btnSubmit = (Button) findViewById(R.id.btnSubmit);
 
         String p = Helper.Get(SignUpCActivity.this, "password");
         txtPassword.setText(p);
@@ -90,6 +111,8 @@ public class SignUpCActivity extends AppCompatActivity {
         }
 
         data = "first_name=" + fname + "&last_name=" + lname + "&email=" + email + "&password=" + password + "&fb_id=" + facebook_id + "&fb_profile=null&registration_type=" + type + "&member_type=1";
+
+        Log.d("data", data);
 
         new registerAsync().execute();
     }
@@ -185,4 +208,5 @@ public class SignUpCActivity extends AppCompatActivity {
         }
 
     }
+
 }

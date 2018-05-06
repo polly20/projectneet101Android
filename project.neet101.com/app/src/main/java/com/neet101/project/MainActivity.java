@@ -129,6 +129,8 @@ public class MainActivity extends AppCompatActivity {
 
         callbackManager = CallbackManager.Factory.create();
 
+        LoginManager.getInstance().logOut();
+
         btnFBLogin1.setReadPermissions(Arrays.asList(EMAIL));
 
         btnFBLogin1.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
@@ -166,6 +168,12 @@ public class MainActivity extends AppCompatActivity {
                             Helper.Put(MainActivity.this, "fname", firstName);
                             Helper.Put(MainActivity.this, "lname", lastName);
                             Helper.Put(MainActivity.this, "email", email);
+
+//                            Intent   main = new Intent(MainActivity.this, DashboardActivity.class);
+//
+//                            startActivity(main);
+//                            finish();
+
 
                             new validate_facebook().execute();
 
