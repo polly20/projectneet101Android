@@ -63,8 +63,15 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
-        new DownloadImageTask((ImageView) findViewById(R.id.profileImage))
-                .execute(imageUrl);
+        if(imageUrl.length() > 0) {
+            new DownloadImageTask((ImageView) findViewById(R.id.profileImage))
+                    .execute(imageUrl);
+        }
+        else {
+            ImageView profile = (ImageView) findViewById(R.id.profileImage);
+            profile.setImageResource(R.mipmap.avatar);
+        }
+
     }
 
 

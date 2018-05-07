@@ -22,8 +22,12 @@ public class HttpHandler {
 
     private static final String TAG = HttpHandler.class.getSimpleName();
 
-    public HttpHandler() {
+    private static String _email;
+    private static String _password;
 
+    public HttpHandler(String Email, String Password) {
+        _email = Email;
+        _password = Password;
     }
 
     public static JSONArray toJSON(String[] inputs) {
@@ -39,11 +43,7 @@ public class HttpHandler {
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-            String email = context.getResources().getString(R.string.neet_api_email);
-
-            String password = context.getResources().getString(R.string.need_api_password);
-
-            String credentials = email + ":" + password;
+            String credentials = _email + ":" + _password;
 
             String auth = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
 

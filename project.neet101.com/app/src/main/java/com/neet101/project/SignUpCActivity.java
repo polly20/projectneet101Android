@@ -132,7 +132,9 @@ public class SignUpCActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... arg0) {
 
-            HttpHandler sh = new HttpHandler();
+            String[] defAccount = Helper.DefaultAccount(_context);
+
+            HttpHandler sh = new HttpHandler(defAccount[0], defAccount[1]);
 
             // Making a request to url and getting response
             String jsonStr = sh.makeServiceCall("http://cpanel.neet101.com/api/registration?" + data, "POST", _context);

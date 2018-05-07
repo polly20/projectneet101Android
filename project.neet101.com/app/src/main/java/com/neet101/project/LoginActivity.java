@@ -3,6 +3,8 @@ package com.neet101.project;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -19,6 +21,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -28,6 +31,11 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,10 +47,14 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
+    private String TAG = SignUpDActivity.class.getSimpleName();
+
     /**
      * Id to identity READ_CONTACTS permission request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
+
+    public Context _context;
 
     /**
      * A dummy authentication store containing known user names and passwords.
@@ -67,6 +79,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         getSupportActionBar().hide();
+
+        _context = getApplicationContext();
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -310,19 +324,79 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
-            }
+            HttpHandler sh = new HttpHandler(mEmail, mPassword);
 
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
+            // Making a request to url and getting response
+            String jsonStr = sh.makeServiceCall("http://cpanel.neet101.com/api/login", "POST", _context);
+
+            Log.e(TAG, "jsonStr: " + jsonStr);
+
+            if (jsonStr != null) {
+                Log.e(TAG, "Response from url: " + jsonStr);
+
+                try {
+                    JSONObject jsonObj = new JSONObject(jsonStr);
+
+                    // Getting JSON Array node
+                    Integer status = jsonObj.getInt("status");
+
+                    String message = jsonObj.getString("message");
+
+                    Log.d("status", status + "");
+
+                    Log.d("message", message);
+
+                    if(status != 200) {
+                        return false;
+                    }
+
+                    JSONArray jArray = jsonObj.getJSONArray("result");
+                    for (int i=0; i < jArray.length(); i++)
+                    {
+                        try {
+                            JSONObject oneObject = jArray.getJSONObject(i);
+                            String first_name = oneObject.getString("first_name");
+                            String last_name = oneObject.getString("last_name");
+                            String email = oneObject.getString("email");
+
+                            Helper.Put(LoginActivity.this, "facebook_id", "");
+                            Helper.Put(LoginActivity.this, "facebook_profile", "");
+                            Helper.Put(LoginActivity.this, "fname", first_name);
+                            Helper.Put(LoginActivity.this, "lname", last_name);
+                            Helper.Put(LoginActivity.this, "email", email);
+
+                        } catch (JSONException e) {
+                            // Oops
+                            Log.d("message", e.getMessage());
+                            return false;
+                        }
+                    }
+
+                } catch (final JSONException e) {
+                    Log.e(TAG, "Json parsing error: " + e.getMessage());
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getApplicationContext(),
+                                    "Json parsing error: " + e.getMessage(),
+                                    Toast.LENGTH_LONG)
+                                    .show();
+                        }
+                    });
+
                 }
+
+            } else {
+                Log.e(TAG, "Couldn't get json from server.");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(),
+                                "Couldn't get json from server. Check LogCat for possible errors!",
+                                Toast.LENGTH_LONG)
+                                .show();
+                    }
+                });
             }
 
             // TODO: register the new account here.
@@ -335,6 +409,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
+                Intent i = new Intent(getApplicationContext(), DashboardActivity.class);
+                startActivity(i);
                 finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

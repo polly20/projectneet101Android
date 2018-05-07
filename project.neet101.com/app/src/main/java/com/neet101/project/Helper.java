@@ -21,6 +21,14 @@ public class Helper {
 
     private static SharedPreferences sharedPref;
 
+    public static String[] DefaultAccount(Context context) {
+        String email = context.getResources().getString(R.string.neet_api_email);
+
+        String password = context.getResources().getString(R.string.need_api_password);
+
+        return new String[] { email, password };
+    }
+
     public static void Put(Activity activity, String key, String value) {
         sharedPref = activity.getSharedPreferences("MySharedPrefTrans", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();

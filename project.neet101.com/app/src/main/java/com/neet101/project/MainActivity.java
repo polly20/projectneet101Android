@@ -169,12 +169,6 @@ public class MainActivity extends AppCompatActivity {
                             Helper.Put(MainActivity.this, "lname", lastName);
                             Helper.Put(MainActivity.this, "email", email);
 
-//                            Intent   main = new Intent(MainActivity.this, DashboardActivity.class);
-//
-//                            startActivity(main);
-//                            finish();
-
-
                             new validate_facebook().execute();
 
                         } catch (JSONException e) {
@@ -226,7 +220,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... arg0) {
 
-            HttpHandler sh = new HttpHandler();
+            String[] defAccount = Helper.DefaultAccount(_context);
+
+            HttpHandler sh = new HttpHandler(defAccount[0], defAccount[1]);
 
             // Making a request to url and getting response
             String jsonStr = sh.makeServiceCall("http://cpanel.neet101.com/api/login/validation?account=" + email, "POST", _context);
