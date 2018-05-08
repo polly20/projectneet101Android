@@ -355,12 +355,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     {
                         try {
                             JSONObject oneObject = jArray.getJSONObject(i);
+                            String fb_id = oneObject.getString("fb_id");
+                            String fb_profile = oneObject.getString("fb_profile");
                             String first_name = oneObject.getString("first_name");
                             String last_name = oneObject.getString("last_name");
                             String email = oneObject.getString("email");
 
-                            Helper.Put(LoginActivity.this, "facebook_id", "");
-                            Helper.Put(LoginActivity.this, "facebook_profile", "");
+                            Helper.Put(LoginActivity.this, "facebook_id", fb_id);
+                            Helper.Put(LoginActivity.this, "facebook_profile", fb_profile);
                             Helper.Put(LoginActivity.this, "fname", first_name);
                             Helper.Put(LoginActivity.this, "lname", last_name);
                             Helper.Put(LoginActivity.this, "email", email);
