@@ -2,15 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.neet101.project">
 
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -30,13 +28,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Slide1Activity">
+
+        </activity>
+
+        <activity android:name=".TargetActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TargetActivity" />
+
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
@@ -65,7 +67,8 @@
             android:value="@string/facebook_app_id" />
 
         <activity android:name=".MessageBoxOk" />
-        <activity android:name=".DashboardActivity"></activity>
+        <activity android:name=".DashboardActivity" />
+        <activity android:name=".RecommendActivity"></activity>
     </application>
 
 </manifest>
