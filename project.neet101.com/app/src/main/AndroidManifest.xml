@@ -32,11 +32,7 @@
         </activity>
 
         <activity android:name=".TargetActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity
@@ -68,7 +64,13 @@
 
         <activity android:name=".MessageBoxOk" />
         <activity android:name=".DashboardActivity" />
-        <activity android:name=".RecommendActivity"></activity>
+        <activity android:name=".RecommendActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
