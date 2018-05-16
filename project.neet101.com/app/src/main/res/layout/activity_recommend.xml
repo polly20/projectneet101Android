@@ -27,6 +27,7 @@
             android:textStyle="bold" />
 
         <EditText
+            android:id="@+id/txtValue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="20"
@@ -54,7 +55,6 @@
 
     </LinearLayout>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -75,7 +75,7 @@
                 >
 
                 <RadioButton
-                    android:id="@+id/rb_50"
+                    android:id="@+id/rb_20"
                     android:button="@null"
                     android:drawableBottom="@android:drawable/btn_radio"
                     android:layout_width="wrap_content"
@@ -86,10 +86,11 @@
                     android:padding="10dp"
                     android:textSize="20dp"
                     android:fontFamily="@font/comfortaa"
+                    android:checked="true"
                     />
 
                 <RadioButton
-                    android:id="@+id/rb_60"
+                    android:id="@+id/rb_30"
                     android:button="@null"
                     android:drawableBottom="@android:drawable/btn_radio"
                     android:layout_width="wrap_content"
@@ -103,7 +104,7 @@
                     />
 
                 <RadioButton
-                    android:id="@+id/rb_70"
+                    android:id="@+id/rb_40"
                     android:button="@null"
                     android:drawableBottom="@android:drawable/btn_radio"
                     android:layout_width="wrap_content"
@@ -117,7 +118,7 @@
                     />
 
                 <RadioButton
-                    android:id="@+id/rb_80"
+                    android:id="@+id/rb_50"
                     android:button="@null"
                     android:drawableBottom="@android:drawable/btn_radio"
                     android:layout_width="wrap_content"
@@ -131,7 +132,7 @@
                     />
 
                 <RadioButton
-                    android:id="@+id/rb_90"
+                    android:id="@+id/rb_60"
                     android:button="@null"
                     android:drawableBottom="@android:drawable/btn_radio"
                     android:layout_width="wrap_content"
@@ -145,7 +146,7 @@
                     />
 
                 <RadioButton
-                    android:id="@+id/rb_100"
+                    android:id="@+id/rb_70"
                     android:button="@null"
                     android:drawableBottom="@android:drawable/btn_radio"
                     android:layout_width="wrap_content"
@@ -159,6 +160,7 @@
                     />
 
                 <RadioButton
+                    android:id="@+id/rb_80"
                     android:button="@null"
                     android:drawableBottom="@android:drawable/btn_radio"
                     android:layout_width="wrap_content"
@@ -172,6 +174,7 @@
                     />
 
                 <RadioButton
+                    android:id="@+id/rb_90"
                     android:button="@null"
                     android:drawableBottom="@android:drawable/btn_radio"
                     android:layout_width="wrap_content"
@@ -185,6 +188,7 @@
                     />
 
                 <RadioButton
+                    android:id="@+id/rb_100"
                     android:button="@null"
                     android:drawableBottom="@android:drawable/btn_radio"
                     android:layout_width="wrap_content"
@@ -201,7 +205,31 @@
 
         </HorizontalScrollView>
 
+
+
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="550dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_enable_pink"
+            android:layout_gravity="center"
+            android:text="Submit"
+            android:textSize="19sp"
+            android:textColor="#fff"
+            android:fontFamily="@font/comfortaa"
+            />
+
+    </LinearLayout>
+
+
 
 
 </android.support.constraint.ConstraintLayout>
