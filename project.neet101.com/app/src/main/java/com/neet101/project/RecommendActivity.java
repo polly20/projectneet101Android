@@ -1,7 +1,10 @@
 package com.neet101.project;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -26,13 +29,26 @@ public class RecommendActivity extends AppCompatActivity {
         getSupportActionBar().hide();
 
         RadioGroup rg = (RadioGroup) findViewById(R.id.rg);
-
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-
                 String value = ((RadioButton)findViewById(checkedId)).getText().toString();
-
                 override_target(value);
+            }
+        });
+
+
+        btnSubmit = (Button) findViewById(R.id.btnSubmit);
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                String value = txtValue.getText().toString();
+
+                Log.d("Logs", value);
+
+
+//                Intent i = new Intent(getBaseContext(), SignUpAActivity.class);
+//                startActivity(i);
             }
         });
     }
