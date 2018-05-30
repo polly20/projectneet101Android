@@ -14,12 +14,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Helper {
 
     private static SharedPreferences sharedPref;
+
+    public static List<DashboardSubject> SubjectList;
+
+    public static DashboardSubject _Bio;
+    public static DashboardSubject _Chem;
+    public static DashboardSubject _Phy;
 
     public static String[] DefaultAccount(Context context) {
         String email = context.getResources().getString(R.string.neet_api_email);

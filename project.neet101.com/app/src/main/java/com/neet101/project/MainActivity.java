@@ -126,7 +126,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         callbackManager = CallbackManager.Factory.create();
 
         LoginManager.getInstance().logOut();

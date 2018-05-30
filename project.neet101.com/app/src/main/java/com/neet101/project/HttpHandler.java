@@ -43,15 +43,17 @@ public class HttpHandler {
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-            String credentials = _email + ":" + _password;
-
-            String auth = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
-
             conn.setConnectTimeout(5000);
 
             conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
 
-            conn.setRequestProperty("Authorization", auth);
+            if(_email != null) {
+                String credentials = _email + ":" + _password;
+
+                String auth = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
+
+                conn.setRequestProperty("Authorization", auth);
+            }
 
             conn.setRequestMethod(Method);
 
