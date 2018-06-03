@@ -131,7 +131,6 @@ public class QuestionDashboardActivity extends AppCompatActivity {
                 }
 
                 List<DashboardSubject> SubjectList = new ArrayList<>();
-
                 JSONArray subjects = jsonObj.getJSONArray("questions_per_subject");
 
                 for (int i = 0; i < subjects.length(); i++) {
@@ -172,22 +171,118 @@ public class QuestionDashboardActivity extends AppCompatActivity {
 
         for (DashboardSubject s : d_subjects) {
 
-            if(ctr == 1) {
-//                Helper._Bio.SubjectId =
-            }
-            else if(ctr == 2) {
-
-            }
-            else {
-
-            }
-
             Log.d("SubjectId", s.SubjectId + "");
             Log.d("Subject", s.Subject);
             Log.d("Total_Exam", s.Total_Exam + "");
 
+            Integer[] Subjects = new Integer[]
+            {
+                s.SubjectId,
+                s.Total_Exam
+            };
+
+
+            new get_questions().execute(Subjects);
+
             ctr++;
         }
         
+    }
+
+    private class get_questions extends AsyncTask<Integer, Void, String[]> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Showing progress dialog
+            pDialog = new ProgressDialog(QuestionDashboardActivity.this);
+            pDialog.setMessage("Please wait...");
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        @Override
+        protected String[] doInBackground(Integer... arg0) {
+
+            Integer Subject_Id = arg0[0];
+            Integer Subject_Count = arg0[1];
+
+            Log.d("Subject_Id", Subject_Id + "");
+
+            String[] defAccount = Helper.DefaultAccount(_context);
+
+            HttpHandler sh = new HttpHandler(null, null);
+
+            // Making a request to url and getting response
+            String jsonStr = sh.makeServiceCall("http://cpanel.neet101.com/api/student/random_question?studentid="+ StudentID +"&subj_id="+ Subject_Id +"&qcount="+ Subject_Count +"&reference_id=" + ExamReference, "GET", _context);
+
+            if (jsonStr != null) {
+                Log.e(TAG, "Response from url: " + jsonStr);
+
+                String[] stringList = new String[] {
+                        jsonStr,
+                        Subject_Id.toString()
+                };
+                return stringList;
+            } else {
+                Log.e(TAG, "Couldn't get json from server.");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(),
+                                "Couldn't get json from server. Check LogCat for possible errors!",
+                                Toast.LENGTH_LONG)
+                                .show();
+                    }
+                });
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String[] stringList) {
+
+            super.onPostExecute(stringList);
+
+            String JSON = stringList[0];
+            String SUB_ID = stringList[1];
+
+
+            // Dismiss the progress dialog
+            if (pDialog.isShowing())
+                pDialog.dismiss();
+
+            try {
+                JSONObject jsonObj = new JSONObject(JSON);
+                Integer status = jsonObj.getInt("status");
+                Integer batch_id = jsonObj.getInt("batch_id");
+
+                if(status != 200) {
+                    return;
+                }
+
+                JSONArray results = jsonObj.getJSONArray("result");
+
+                Log.d("SUB_ID" , SUB_ID + "");
+                Log.d("results" , results + "");
+
+
+            } catch (final JSONException e) {
+                Log.e(TAG, "Json parsing error: " + e.getMessage());
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(),
+                                "Json parsing error: " + e.getMessage(),
+                                Toast.LENGTH_LONG)
+                                .show();
+                    }
+                });
+
+            }
+
+        }
+
     }
 }
