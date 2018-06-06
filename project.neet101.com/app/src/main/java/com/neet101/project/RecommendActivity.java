@@ -46,9 +46,6 @@ public class RecommendActivity extends AppCompatActivity {
 
                 Log.d("Logs", value);
 
-
-//                Intent i = new Intent(getBaseContext(), SignUpAActivity.class);
-//                startActivity(i);
             }
         });
     }

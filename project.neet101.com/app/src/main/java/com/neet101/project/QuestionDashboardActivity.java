@@ -3,6 +3,7 @@ package com.neet101.project;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -32,6 +33,8 @@ public class QuestionDashboardActivity extends AppCompatActivity {
 
     public String ExamReference ;
 
+    private mySQLite mysqlite;
+
 //    public List<DashboardSubject> SubjectList;
 
     @Override
@@ -48,7 +51,7 @@ public class QuestionDashboardActivity extends AppCompatActivity {
         btnBiology.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getBaseContext(), LoginActivity.class);
+                Intent i = new Intent(getBaseContext(), QuestionActivity.class);
                 startActivity(i);
             }
         });
@@ -56,7 +59,7 @@ public class QuestionDashboardActivity extends AppCompatActivity {
         btnChemistry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getBaseContext(), LoginActivity.class);
+                Intent i = new Intent(getBaseContext(), QuestionActivity.class);
                 startActivity(i);
             }
         });
@@ -64,13 +67,22 @@ public class QuestionDashboardActivity extends AppCompatActivity {
         btnPhysics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getBaseContext(), LoginActivity.class);
+                Intent i = new Intent(getBaseContext(), QuestionActivity.class);
                 startActivity(i);
             }
         });
 
 
+        mySQLite.isClearTable = true;
+        CreatedDB();
+
         new checking_account().execute();
+    }
+
+    public void CreatedDB() {
+        SQLiteDatabase sqlDB = openOrCreateDatabase(mySQLite.DB_NAME, Context.MODE_PRIVATE, null);
+        mysqlite = new mySQLite(sqlDB);
+
     }
 
     private class checking_account extends AsyncTask<Void, Void, String> {
@@ -93,7 +105,7 @@ public class QuestionDashboardActivity extends AppCompatActivity {
             HttpHandler sh = new HttpHandler(null, null);
 
             // Making a request to url and getting response
-            String jsonStr = sh.makeServiceCall("http://cpanel.neet101.com/api/student/question_dashboard?studentid=" + StudentID, "GET", _context);
+            String jsonStr = sh.makeServiceCall("http://cpanel.neet101.com/api/student/v1/question_dashboard?studentid=" + StudentID, "GET", _context);
 
             if (jsonStr != null) {
                 Log.e(TAG, "Response from url: " + jsonStr);
@@ -131,7 +143,6 @@ public class QuestionDashboardActivity extends AppCompatActivity {
                 }
 
                 List<DashboardSubject> SubjectList = new ArrayList<>();
-
                 JSONArray subjects = jsonObj.getJSONArray("questions_per_subject");
 
                 for (int i = 0; i < subjects.length(); i++) {
@@ -172,22 +183,161 @@ public class QuestionDashboardActivity extends AppCompatActivity {
 
         for (DashboardSubject s : d_subjects) {
 
-            if(ctr == 1) {
-//                Helper._Bio.SubjectId =
-            }
-            else if(ctr == 2) {
-
-            }
-            else {
-
-            }
-
             Log.d("SubjectId", s.SubjectId + "");
             Log.d("Subject", s.Subject);
             Log.d("Total_Exam", s.Total_Exam + "");
 
-            ctr++;
+           String isDownloaded = Helper.Get(QuestionDashboardActivity.this, "downloaded");
+
+           if(isDownloaded.contains("NO")) {
+               Integer[] Subjects = new Integer[]
+               {
+                       s.SubjectId,
+                       s.Total_Exam
+               };
+               new get_questions().execute(Subjects);
+           }
+
+            break;
+
+//            ctr++;
         }
         
+    }
+
+    private class get_questions extends AsyncTask<Integer, Void, String[]> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // Showing progress dialog
+            pDialog = new ProgressDialog(QuestionDashboardActivity.this);
+            pDialog.setMessage("Please wait...");
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+        @Override
+        protected String[] doInBackground(Integer... arg0) {
+
+            Integer Subject_Id = arg0[0];
+            Integer Subject_Count = arg0[1];
+
+            Log.d("Subject_Id", Subject_Id + "");
+
+            String[] defAccount = Helper.DefaultAccount(_context);
+
+            HttpHandler sh = new HttpHandler(null, null);
+
+            String url_ = "http://192.168.1.4:8024/api/student/v1/random_question?studentid="+ StudentID +"&subj_id="+ Subject_Id +"&qcount="+ Subject_Count +"&reference_id=" + ExamReference;
+
+            // Making a request to url and getting response
+            String jsonStr = sh.makeServiceCall(url_, "GET", _context);
+
+            if (jsonStr != null) {
+                Log.e(TAG, "Response url: " + url_);
+
+                Log.e(TAG, "Response from url: " + jsonStr);
+
+                String[] stringList = new String[] {
+                        jsonStr,
+                        Subject_Id.toString()
+                };
+                return stringList;
+            } else {
+                Log.e(TAG, "Couldn't get json from server.");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(),
+                                "Couldn't get json from server. Check LogCat for possible errors!",
+                                Toast.LENGTH_LONG)
+                                .show();
+                    }
+                });
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String[] stringList) {
+
+            super.onPostExecute(stringList);
+
+            String JSON = stringList[0];
+            String SUB_ID = stringList[1];
+
+
+            // Dismiss the progress dialog
+            if (pDialog.isShowing())
+                pDialog.dismiss();
+
+            try {
+
+
+                JSONObject jsonObj = new JSONObject(JSON);
+                Integer status = jsonObj.getInt("status");
+                String reference_id = jsonObj.getString("reference_id");
+                Integer batch_id = jsonObj.getInt("batch_id");
+
+                if(status != 200) {
+                    return;
+                }
+
+                mysqlite.insert(mySQLite.tblStudent, StudentID + ", '" + reference_id + "', " + batch_id);
+
+                JSONArray results = jsonObj.getJSONArray("result");
+
+                Log.d("results", results + "");
+
+                Helper.Put(QuestionDashboardActivity.this, "downloaded", "NO");
+
+                Helper.Put(QuestionDashboardActivity.this, "total_question", results.length() + "");
+
+                for(Integer i = 0; i < results.length(); i++) {
+
+                    JSONObject q = results.getJSONObject(i);
+                    Integer qid = q.getInt("id");
+                    String question = q.getString("question");
+                    JSONObject choices = q.getJSONObject("choices");
+                    String choice_1 = choices.getString("choice_1");
+                    String choice_2 = choices.getString("choice_2");
+                    String choice_3 = choices.getString("choice_3");
+                    String choice_4 = choices.getString("choice_4");
+                    Integer correct_answer = q.getInt("correct_answer");
+                    String correct_answer_explanation = q.getString("correct_answer_explanation");
+
+                    String strQuery = StudentID + " | " + batch_id + " | ";
+                    strQuery += qid + " | " + question + " | " + choice_1 + " | " + choice_2 + " | " + choice_3 + " | " + choice_4 + " | ";
+                    strQuery += correct_answer + " | " + correct_answer_explanation;
+                    Log.d("COUNT " + i , strQuery + "");
+
+                    Helper.Put(QuestionDashboardActivity.this, SUB_ID + "_" + i, strQuery);
+
+                    Helper.Put(QuestionDashboardActivity.this, "downloaded", "YES");
+
+                }
+
+                Log.d("SUB_ID" , SUB_ID + "");
+                Log.d("results" , results + "");
+
+
+            } catch (final JSONException e) {
+                Log.e(TAG, "Json parsing error: " + e.getMessage());
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(),
+                                "Json parsing error: " + e.getMessage(),
+                                Toast.LENGTH_LONG)
+                                .show();
+                    }
+                });
+
+            }
+
+        }
+
     }
 }
