@@ -22,6 +22,9 @@ public class Helper {
 
     private static SharedPreferences sharedPref;
 
+    public static Integer StudentUid;
+    public static Integer SubjectId;
+
     public static List<DashboardSubject> SubjectList;
 
     public static DashboardSubject _Bio;

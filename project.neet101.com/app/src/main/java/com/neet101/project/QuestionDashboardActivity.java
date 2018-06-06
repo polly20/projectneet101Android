@@ -29,8 +29,6 @@ public class QuestionDashboardActivity extends AppCompatActivity {
 
     public Button btnBiology, btnChemistry, btnPhysics;
 
-    public Integer StudentID = 3;
-
     public String ExamReference ;
 
     private mySQLite mysqlite;
@@ -42,6 +40,8 @@ public class QuestionDashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_dashboard);
 
+        Helper.StudentUid = 3;
+
         _context = getApplicationContext();
 
         btnBiology = (Button) findViewById(R.id.btnBiology) ;
@@ -51,6 +51,8 @@ public class QuestionDashboardActivity extends AppCompatActivity {
         btnBiology.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Helper.SubjectId = 1;
                 Intent i = new Intent(getBaseContext(), QuestionActivity.class);
                 startActivity(i);
             }
@@ -59,6 +61,8 @@ public class QuestionDashboardActivity extends AppCompatActivity {
         btnChemistry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Helper.SubjectId = 2;
                 Intent i = new Intent(getBaseContext(), QuestionActivity.class);
                 startActivity(i);
             }
@@ -67,6 +71,8 @@ public class QuestionDashboardActivity extends AppCompatActivity {
         btnPhysics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                Helper.SubjectId = 3;
                 Intent i = new Intent(getBaseContext(), QuestionActivity.class);
                 startActivity(i);
             }
@@ -81,7 +87,7 @@ public class QuestionDashboardActivity extends AppCompatActivity {
 
     public void CreatedDB() {
         SQLiteDatabase sqlDB = openOrCreateDatabase(mySQLite.DB_NAME, Context.MODE_PRIVATE, null);
-        mysqlite = new mySQLite(sqlDB);
+        mysqlite = new mySQLite(sqlDB, true);
 
     }
 
@@ -105,7 +111,7 @@ public class QuestionDashboardActivity extends AppCompatActivity {
             HttpHandler sh = new HttpHandler(null, null);
 
             // Making a request to url and getting response
-            String jsonStr = sh.makeServiceCall("http://cpanel.neet101.com/api/student/v1/question_dashboard?studentid=" + StudentID, "GET", _context);
+            String jsonStr = sh.makeServiceCall("http://cpanel.neet101.com/api/student/v1/question_dashboard?studentid=" + Helper.StudentUid, "GET", _context);
 
             if (jsonStr != null) {
                 Log.e(TAG, "Response from url: " + jsonStr);
@@ -189,7 +195,7 @@ public class QuestionDashboardActivity extends AppCompatActivity {
 
            String isDownloaded = Helper.Get(QuestionDashboardActivity.this, "downloaded");
 
-           if(isDownloaded.contains("NO")) {
+           if(isDownloaded.contains("YES")) {
                Integer[] Subjects = new Integer[]
                {
                        s.SubjectId,
@@ -229,7 +235,7 @@ public class QuestionDashboardActivity extends AppCompatActivity {
 
             HttpHandler sh = new HttpHandler(null, null);
 
-            String url_ = "http://192.168.1.4:8024/api/student/v1/random_question?studentid="+ StudentID +"&subj_id="+ Subject_Id +"&qcount="+ Subject_Count +"&reference_id=" + ExamReference;
+            String url_ = "http://192.168.1.4:8024/api/student/v1/random_question?studentid="+ Helper.StudentUid +"&subj_id="+ Subject_Id +"&qcount="+ Subject_Count +"&reference_id=" + ExamReference;
 
             // Making a request to url and getting response
             String jsonStr = sh.makeServiceCall(url_, "GET", _context);
@@ -285,7 +291,7 @@ public class QuestionDashboardActivity extends AppCompatActivity {
                     return;
                 }
 
-                mysqlite.insert(mySQLite.tblStudent, StudentID + ", '" + reference_id + "', " + batch_id);
+                mysqlite.insert(mySQLite.tblStudent, Helper.StudentUid + ", '" + reference_id + "', " + batch_id);
 
                 JSONArray results = jsonObj.getJSONArray("result");
 
@@ -308,15 +314,14 @@ public class QuestionDashboardActivity extends AppCompatActivity {
                     Integer correct_answer = q.getInt("correct_answer");
                     String correct_answer_explanation = q.getString("correct_answer_explanation");
 
-                    String strQuery = StudentID + " | " + batch_id + " | ";
-                    strQuery += qid + " | " + question + " | " + choice_1 + " | " + choice_2 + " | " + choice_3 + " | " + choice_4 + " | ";
-                    strQuery += correct_answer + " | " + correct_answer_explanation;
+                    String strQuery = Helper.StudentUid + ";" + batch_id + ";";
+                    strQuery += qid + ";" + question + ";" + choice_1 + ";" + choice_2 + ";" + choice_3 + ";" + choice_4 + ";";
+                    strQuery += correct_answer + ";" + correct_answer_explanation;
                     Log.d("COUNT " + i , strQuery + "");
 
                     Helper.Put(QuestionDashboardActivity.this, SUB_ID + "_" + i, strQuery);
 
                     Helper.Put(QuestionDashboardActivity.this, "downloaded", "YES");
-
                 }
 
                 Log.d("SUB_ID" , SUB_ID + "");

@@ -8,28 +8,37 @@ import android.util.Log;
 public class mySQLite {
 
     private static String TAG = "mySQLite";
-    public static String DB_NAME ="kpadb_neet101";
-    public static String tblStudent ="student";
-    public static String tblQuestions ="questions";
+    public static String DB_NAME = "kpadb_neet101";
+    public static String tblStudent = "student";
+    public static String tblQuestions = "questions";
+    public static String tblTaken = "taken";
 
     public static boolean isClearTable;
 
     private SQLiteDatabase SQL_DB;
 
-    public mySQLite(SQLiteDatabase database)
+    public mySQLite(SQLiteDatabase database, boolean isRefresh)
     {
         SQL_DB = database;
+
+        if(isRefresh) {
+            return;
+        }
 
         if(isClearTable) {
             execute("DROP TABLE IF EXISTS " + mySQLite.tblStudent + ";");
             execute("DROP TABLE IF EXISTS " + mySQLite.tblQuestions + ";");
+            execute("DROP TABLE IF EXISTS " + mySQLite.tblTaken + ";");
         }
 
         String tbl_field = "student_id INT, reference_id VARCHAR, batch_id INT";
-        created_table("student", tbl_field);
+        created_table(mySQLite.tblStudent, tbl_field);
 
         tbl_field = "subject_id INT, batch_id INT, question_id INT, question VARCHAR, choice_1 VARCHAR, choice_2 VARCHAR, choice_3 VARCHAR, choice_4 VARCHAR, correct_answer INT, answer_explanation VARCHAR";
-        created_table("questions", tbl_field);
+        created_table(mySQLite.tblQuestions, tbl_field);
+
+        tbl_field = "subject_id INT, batch_id INT, question_id INT";
+        created_table(mySQLite.tblTaken, tbl_field);
     }
 
 
@@ -65,6 +74,30 @@ public class mySQLite {
         }
         catch (SQLiteException ex) {
             Log.d(TAG, ex.toString());
+        }
+        return false;
+    }
+
+    public Cursor select(String query) {
+        Cursor c = null;
+        try {
+            c = SQL_DB.rawQuery(query, null);
+        }
+        catch (Exception ex) {
+            Log.d(TAG, ex.toString());
+        }
+        return c;
+    }
+
+    public boolean checkIfQuestionTaken(Integer qid) {
+        Log.d("String UID", qid + "");
+        Cursor c = this.select("SELECT * FROM taken WHERE question_id = "+qid+";");
+        while(c.moveToNext())
+        {
+            int box_uid = Integer.parseInt(c.getString(0));
+            if(box_uid > 0) {
+                return true;
+            }
         }
         return false;
     }

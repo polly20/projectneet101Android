@@ -12,6 +12,7 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/txt_question"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="20dp"
@@ -74,6 +75,7 @@
                         />
 
                     <TextView
+                        android:id="@+id/txt_a"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="A"
@@ -106,6 +108,7 @@
                         android:layout_marginTop="-30dp"/>
 
                     <TextView
+                        android:id="@+id/txt_b"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="B"
@@ -138,6 +141,7 @@
                         android:layout_marginTop="-30dp"/>
 
                     <TextView
+                        android:id="@+id/txt_c"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="C"
@@ -170,6 +174,7 @@
                         android:layout_marginTop="-30dp"/>
 
                     <TextView
+                        android:id="@+id/txt_d"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="D"
