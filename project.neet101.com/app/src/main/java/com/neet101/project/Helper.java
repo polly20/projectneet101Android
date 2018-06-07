@@ -14,12 +14,30 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Helper {
 
     private static SharedPreferences sharedPref;
+
+    public static Integer StudentUid;
+    public static Integer SubjectId;
+
+    public static List<DashboardSubject> SubjectList;
+
+    public static DashboardSubject _Bio;
+    public static DashboardSubject _Chem;
+    public static DashboardSubject _Phy;
+
+    public static String[] DefaultAccount(Context context) {
+        String email = context.getResources().getString(R.string.neet_api_email);
+
+        String password = context.getResources().getString(R.string.need_api_password);
+
+        return new String[] { email, password };
+    }
 
     public static void Put(Activity activity, String key, String value) {
         sharedPref = activity.getSharedPreferences("MySharedPrefTrans", Context.MODE_PRIVATE);
@@ -56,8 +74,7 @@ public class Helper {
         Matcher matcher = pattern.matcher(inputStr);
         return matcher.matches();
     }
-
-
+    
     public static void MessageBoxOKShow(Activity activity, String caption, String message, int height){
 
         final Dialog dialog = new Dialog(activity);

@@ -17,6 +17,13 @@ public class Slide1Activity extends AppCompatActivity {
         setContentView(R.layout.activity_slide1);
         getSupportActionBar().hide();
 
+        String is_logged = Helper.Get(Slide1Activity.this, "is_logged");
+        if(is_logged.contains("YES")) {
+            Intent i = new Intent(getBaseContext(), DashboardActivity.class);
+            startActivity(i);
+            finish();
+        }
+
         btnSkip = (Button) findViewById(R.id.btnSkip);
         btnSkip.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -24,10 +31,9 @@ public class Slide1Activity extends AppCompatActivity {
                 Intent i = new Intent(getBaseContext(), MainActivity.class);
 //                i.putExtra("PersonID", personID);
                 startActivity(i);
+                finish();
             }
         });
-
-
 
 
         ViewPager mViewPager = (ViewPager) findViewById(R.id.viewPageAndroid);

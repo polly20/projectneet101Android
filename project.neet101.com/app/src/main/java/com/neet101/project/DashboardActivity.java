@@ -7,10 +7,12 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.CallbackManager;
 import com.facebook.FacebookSdk;
@@ -38,10 +40,19 @@ public class DashboardActivity extends AppCompatActivity {
         setTitle("Profile");
 
         Bundle inBundle = getIntent().getExtras();
-        firstName = inBundle.getString("name");
-        lastName = inBundle.getString("surname");
-        email = inBundle.getString("email");
-        imageUrl = inBundle.getString("imageUrl");
+
+        Helper.Put(DashboardActivity.this, "is_logged", "YES");
+
+        String fname = Helper.Get(DashboardActivity.this, "fname");
+        String lname = Helper.Get(DashboardActivity.this, "lname");
+        String emailAddress = Helper.Get(DashboardActivity.this, "email");
+        String facebook_id = Helper.Get(DashboardActivity.this, "facebook_id");
+        String facebook_profile = Helper.Get(DashboardActivity.this, "facebook_profile");
+
+        firstName = fname;
+        lastName = lname;
+        email = emailAddress;
+        imageUrl = facebook_profile;
 
         TextView Fullname = (TextView)findViewById(R.id.Fullname);
         Fullname.setText(firstName + " " + lastName);
@@ -57,8 +68,44 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
-        new DownloadImageTask((ImageView) findViewById(R.id.profileImage))
-                .execute(imageUrl);
+        if(imageUrl.length() > 0) {
+
+            Log.d("FBImages1", imageUrl);
+
+            new DownloadImageTask((ImageView) findViewById(R.id.profileImage))
+                    .execute(imageUrl);
+        }
+        else {
+
+            if(facebook_id != null) {
+                String fb_me = "https://graph.facebook.com/" + facebook_id + "/picture?type=large";
+
+                Log.d("FBImages2", fb_me);
+
+                new DownloadImageTask((ImageView) findViewById(R.id.profileImage))
+                        .execute(fb_me);
+            }
+            else {
+                Log.d("FBImages2", null);
+
+                ImageView profile = (ImageView) findViewById(R.id.profileImage);
+                profile.setImageResource(R.mipmap.avatar);
+            }
+
+        }
+
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+            Toast.makeText(getApplicationContext(), "You cannot go back.",
+                    Toast.LENGTH_SHORT).show();
+
+            return false;
+        }
+
+        return super.onKeyDown(keyCode, event);
     }
 
 
@@ -88,6 +135,7 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     private void logout(){
+        Helper.Put(DashboardActivity.this, "is_logged", "NO");
         LoginManager.getInstance().logOut();
         Intent login = new Intent(DashboardActivity.this, MainActivity.class);
         startActivity(login);
