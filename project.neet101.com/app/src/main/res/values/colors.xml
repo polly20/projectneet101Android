@@ -4,6 +4,9 @@
     <color name="colorPrimaryDark">#E43556</color>
     <color name="colorAccent">#FFF</color>
 
+    <color name="correct">#47B02F</color>
+    <color name="incorrect">#E43556</color>
+
 
     <!--//E43556-->
 </resources>
