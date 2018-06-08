@@ -1,11 +1,13 @@
 package com.neet101.project;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -20,7 +22,11 @@ public class QuestionActivity extends AppCompatActivity {
 
     RadioButton rbCache;
 
+    Button btnSubmit;
+
     public static Integer TotalQuestion;
+
+    public static Integer TotalExamTaken;
 
     private mySQLite mysqlite;
 
@@ -34,8 +40,6 @@ public class QuestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
 
-        Helper.SubjectId = 1;
-
         String total_question = Helper.Get(QuestionActivity.this, "total_question");
 
         TotalQuestion = Integer.parseInt(total_question);
@@ -43,9 +47,9 @@ public class QuestionActivity extends AppCompatActivity {
 
         InitDB();
 
-        Integer code = TotalQuestion - (TotalQuestion - 0);
+        Integer code = TotalQuestion - (TotalQuestion - TotalExamTaken);
 
-        String question_key = Helper.SubjectId + "_" + code;
+        String question_key = Helper.SubjectId + "kpa" + code;
 
         String data = Helper.Get(QuestionActivity.this, question_key);
 
@@ -59,10 +63,11 @@ public class QuestionActivity extends AppCompatActivity {
         Log.d("question_id", questions[2] + "");
 
 
-
         boolean isTaken = mysqlite.checkIfQuestionTaken(1);
 
         Log.d("isTaken", "isTaken" + "");
+
+        btnSubmit = (Button) findViewById(R.id.btnSubmit);
 
         txt_question = (TextView) findViewById(R.id.txt_question);
         txt_a = (TextView) findViewById(R.id.txt_a);
@@ -77,6 +82,10 @@ public class QuestionActivity extends AppCompatActivity {
         txt_c.setText(questions[6]);
         txt_d.setText(questions[7]);
 
+        AnswerViewActivity.RightAnswer = Integer.parseInt(questions[8]);
+
+        Log.d("RightAnswer", questions[8]);
+
         rbt_a = (RadioButton) findViewById(R.id.rb_a);
         rbt_b = (RadioButton) findViewById(R.id.rb_b);
         rbt_c = (RadioButton) findViewById(R.id.rb_c);
@@ -86,6 +95,8 @@ public class QuestionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d("Logs", "a");
+
+                AnswerViewActivity.StudentAnswer = 1;
 
                 rbt_b.setChecked(false);
                 rbt_c.setChecked(false);
@@ -98,6 +109,8 @@ public class QuestionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Log.d("Logs", "b");
 
+                AnswerViewActivity.StudentAnswer = 2;
+
                 rbt_a.setChecked(false);
                 rbt_c.setChecked(false);
                 rbt_d.setChecked(false);
@@ -108,6 +121,8 @@ public class QuestionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d("Logs", "c");
+
+                AnswerViewActivity.StudentAnswer = 3;
 
                 rbt_a.setChecked(false);
                 rbt_b.setChecked(false);
@@ -120,9 +135,21 @@ public class QuestionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Log.d("Logs", "d");
 
+                AnswerViewActivity.StudentAnswer = 4;
+
                 rbt_a.setChecked(false);
                 rbt_b.setChecked(false);
                 rbt_c.setChecked(false);
+            }
+        });
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Logs", "d");
+
+                Intent i = new Intent(getBaseContext(), AnswerViewActivity.class);
+                startActivity(i);
             }
         });
 

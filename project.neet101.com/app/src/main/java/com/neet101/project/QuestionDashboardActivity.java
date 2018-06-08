@@ -41,6 +41,7 @@ public class QuestionDashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_question_dashboard);
 
         Helper.StudentUid = 3;
+        QuestionActivity.TotalExamTaken = 0;
 
         _context = getApplicationContext();
 
@@ -193,21 +194,29 @@ public class QuestionDashboardActivity extends AppCompatActivity {
             Log.d("Subject", s.Subject);
             Log.d("Total_Exam", s.Total_Exam + "");
 
-           String isDownloaded = Helper.Get(QuestionDashboardActivity.this, "downloaded");
+//           String isDownloaded = Helper.Get(QuestionDashboardActivity.this, "downloaded");
 
-           if(isDownloaded.contains("YES")) {
-               Integer[] Subjects = new Integer[]
-               {
-                       s.SubjectId,
-                       s.Total_Exam
-               };
-               new get_questions().execute(Subjects);
-           }
+//           if(isDownloaded.contains("NO")) {
+//               Integer[] Subjects = new Integer[]
+//               {
+//                       s.SubjectId,
+//                       s.Total_Exam
+//               };
+//               new get_questions().execute(Subjects);
+//           }
 
-            break;
+            Integer[] Subjects = new Integer[]
+                    {
+                            s.SubjectId,
+                            s.Total_Exam
+                    };
 
-//            ctr++;
+            if(s.SubjectId == 1 && s.SubjectId <=3) {
+                new get_questions().execute(Subjects);
+            }
+            ctr++;
         }
+
         
     }
 
@@ -235,7 +244,7 @@ public class QuestionDashboardActivity extends AppCompatActivity {
 
             HttpHandler sh = new HttpHandler(null, null);
 
-            String url_ = "http://192.168.1.4:8024/api/student/v1/random_question?studentid="+ Helper.StudentUid +"&subj_id="+ Subject_Id +"&qcount="+ Subject_Count +"&reference_id=" + ExamReference;
+            String url_ = "http://cpanel.neet101.com/api/student/v1/random_question?studentid="+ Helper.StudentUid +"&subj_id="+ Subject_Id +"&qcount="+ Subject_Count +"&reference_id=" + ExamReference;
 
             // Making a request to url and getting response
             String jsonStr = sh.makeServiceCall(url_, "GET", _context);
@@ -274,13 +283,11 @@ public class QuestionDashboardActivity extends AppCompatActivity {
             String JSON = stringList[0];
             String SUB_ID = stringList[1];
 
-
             // Dismiss the progress dialog
             if (pDialog.isShowing())
                 pDialog.dismiss();
 
             try {
-
 
                 JSONObject jsonObj = new JSONObject(JSON);
                 Integer status = jsonObj.getInt("status");
@@ -319,14 +326,18 @@ public class QuestionDashboardActivity extends AppCompatActivity {
                     strQuery += correct_answer + ";" + correct_answer_explanation;
                     Log.d("COUNT " + i , strQuery + "");
 
-                    Helper.Put(QuestionDashboardActivity.this, SUB_ID + "_" + i, strQuery);
+                    String keyname = SUB_ID + "kpa" + i;
+
+                    Log.d("keyname" , keyname);
+
+                    Helper.Put(QuestionDashboardActivity.this, keyname, strQuery);
 
                     Helper.Put(QuestionDashboardActivity.this, "downloaded", "YES");
                 }
 
+
                 Log.d("SUB_ID" , SUB_ID + "");
                 Log.d("results" , results + "");
-
 
             } catch (final JSONException e) {
                 Log.e(TAG, "Json parsing error: " + e.getMessage());

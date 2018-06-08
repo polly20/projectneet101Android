@@ -58,21 +58,16 @@
 
         <activity android:name=".MessageBoxOk" />
         <activity android:name=".DashboardActivity" />
-        <activity android:name=".RecommendActivity"></activity>
+        <activity android:name=".RecommendActivity" />
         <activity android:name=".QuestionDashboardActivity">
-
-
-
-        </activity>
-        <activity android:name=".QuestionActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+        <activity android:name=".QuestionActivity"></activity>
+        <activity android:name=".AnswerViewActivity"></activity>
     </application>
 
 </manifest>
