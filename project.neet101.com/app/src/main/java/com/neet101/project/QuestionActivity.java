@@ -22,7 +22,9 @@ public class QuestionActivity extends AppCompatActivity {
 
     RadioButton rbCache;
 
-    Button btnSubmit;
+    Button btnSubmit, btnA, btnB, btnC, btnD;
+
+    public static String Question, choicesA, choicesB, choicesC, choicesD;
 
     public static Integer TotalQuestion;
 
@@ -44,7 +46,6 @@ public class QuestionActivity extends AppCompatActivity {
 
         TotalQuestion = Integer.parseInt(total_question);
 
-
         InitDB();
 
         Integer code = TotalQuestion - (TotalQuestion - TotalExamTaken);
@@ -57,11 +58,9 @@ public class QuestionActivity extends AppCompatActivity {
 
         Log.d("data", data);
 
-
         String[] questions = data.split(";");
 
         Log.d("question_id", questions[2] + "");
-
 
         boolean isTaken = mysqlite.checkIfQuestionTaken(1);
 
@@ -75,12 +74,22 @@ public class QuestionActivity extends AppCompatActivity {
         txt_c = (TextView) findViewById(R.id.txt_c);
         txt_d = (TextView) findViewById(R.id.txt_d);
 
+        btnA = (Button) findViewById(R.id.btnA);
+        btnB = (Button) findViewById(R.id.btnB);
+        btnC = (Button) findViewById(R.id.btnC);
+        btnD = (Button) findViewById(R.id.btnD);
 
-        txt_question.setText(questions[3]);
-        txt_a.setText(questions[4]);
-        txt_b.setText(questions[5]);
-        txt_c.setText(questions[6]);
-        txt_d.setText(questions[7]);
+        Question = questions[3];
+        choicesA = questions[4];
+        choicesB = questions[5];
+        choicesC = questions[6];
+        choicesD = questions[7];
+
+        txt_question.setText(Question);
+        btnA.setText(choicesA);
+        btnB.setText(choicesB);
+        btnC.setText(choicesC);
+        btnD.setText(choicesD);
 
         AnswerViewActivity.RightAnswer = Integer.parseInt(questions[8]);
 
@@ -104,6 +113,20 @@ public class QuestionActivity extends AppCompatActivity {
             }
         });
 
+        btnA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Logs", "a");
+
+                AnswerViewActivity.StudentAnswer = 1;
+
+                rbt_a.setChecked(true);
+                rbt_b.setChecked(false);
+                rbt_c.setChecked(false);
+                rbt_d.setChecked(false);
+            }
+        });
+
         rbt_b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,6 +135,20 @@ public class QuestionActivity extends AppCompatActivity {
                 AnswerViewActivity.StudentAnswer = 2;
 
                 rbt_a.setChecked(false);
+                rbt_c.setChecked(false);
+                rbt_d.setChecked(false);
+            }
+        });
+
+        btnB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Logs", "a");
+
+                AnswerViewActivity.StudentAnswer = 2;
+
+                rbt_a.setChecked(false);
+                rbt_b.setChecked(true);
                 rbt_c.setChecked(false);
                 rbt_d.setChecked(false);
             }
@@ -130,6 +167,20 @@ public class QuestionActivity extends AppCompatActivity {
             }
         });
 
+        btnC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Logs", "a");
+
+                AnswerViewActivity.StudentAnswer = 3;
+
+                rbt_a.setChecked(false);
+                rbt_b.setChecked(false);
+                rbt_c.setChecked(true);
+                rbt_d.setChecked(false);
+            }
+        });
+
         rbt_d.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -140,6 +191,20 @@ public class QuestionActivity extends AppCompatActivity {
                 rbt_a.setChecked(false);
                 rbt_b.setChecked(false);
                 rbt_c.setChecked(false);
+            }
+        });
+
+        btnD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("Logs", "a");
+
+                AnswerViewActivity.StudentAnswer = 4;
+
+                rbt_a.setChecked(false);
+                rbt_b.setChecked(false);
+                rbt_c.setChecked(false);
+                rbt_d.setChecked(true);
             }
         });
 

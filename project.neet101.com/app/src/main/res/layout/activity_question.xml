@@ -74,15 +74,28 @@
                         android:layout_marginTop="-30dp"
                         />
 
-                    <TextView
-                        android:id="@+id/txt_a"
+                    <!--<TextView-->
+                        <!--android:id="@+id/txt_a"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="A"-->
+                        <!--android:textSize="17sp"-->
+                        <!--android:textColor="#000"-->
+                        <!--android:fontFamily="@font/comfortaa"-->
+                        <!--android:layout_marginLeft="5dp"/>-->
+
+                    <Button
+                        android:id="@+id/btnA"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="A"
-                        android:textSize="17sp"
+                        android:textSize="16sp"
                         android:textColor="#000"
+                        android:textAlignment="viewStart"
+                        android:background="#00ffffff"
+                        android:padding="5dp"
                         android:fontFamily="@font/comfortaa"
-                        android:layout_marginLeft="5dp"/>
+                        />
 
 
                 </TableRow>
@@ -107,15 +120,28 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="-30dp"/>
 
-                    <TextView
-                        android:id="@+id/txt_b"
+                    <!--<TextView-->
+                        <!--android:id="@+id/txt_b"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="B"-->
+                        <!--android:textSize="17sp"-->
+                        <!--android:textColor="#000"-->
+                        <!--android:fontFamily="@font/comfortaa"-->
+                        <!--android:layout_marginLeft="5dp"/>-->
+
+                    <Button
+                        android:id="@+id/btnB"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="B"
-                        android:textSize="17sp"
+                        android:text="A"
+                        android:textSize="16sp"
                         android:textColor="#000"
+                        android:textAlignment="viewStart"
+                        android:background="#00ffffff"
+                        android:padding="5dp"
                         android:fontFamily="@font/comfortaa"
-                        android:layout_marginLeft="5dp"/>
+                        />
 
 
                 </TableRow>
@@ -140,15 +166,28 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="-30dp"/>
 
-                    <TextView
-                        android:id="@+id/txt_c"
+                    <!--<TextView-->
+                        <!--android:id="@+id/txt_c"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="C"-->
+                        <!--android:textSize="17sp"-->
+                        <!--android:textColor="#000"-->
+                        <!--android:fontFamily="@font/comfortaa"-->
+                        <!--android:layout_marginLeft="5dp"/>-->
+
+                    <Button
+                        android:id="@+id/btnC"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="C"
-                        android:textSize="17sp"
+                        android:text="A"
+                        android:textSize="16sp"
                         android:textColor="#000"
+                        android:textAlignment="viewStart"
+                        android:background="#00ffffff"
+                        android:padding="5dp"
                         android:fontFamily="@font/comfortaa"
-                        android:layout_marginLeft="5dp"/>
+                        />
 
 
                 </TableRow>
@@ -173,15 +212,28 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="-30dp"/>
 
-                    <TextView
-                        android:id="@+id/txt_d"
+                    <!--<TextView-->
+                        <!--android:id="@+id/txt_d"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:text="D"-->
+                        <!--android:textSize="17sp"-->
+                        <!--android:textColor="#000"-->
+                        <!--android:fontFamily="@font/comfortaa"-->
+                        <!--android:layout_marginLeft="5dp"/>-->
+
+                    <Button
+                        android:id="@+id/btnD"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="D"
-                        android:textSize="17sp"
+                        android:text="A"
+                        android:textSize="16sp"
                         android:textColor="#000"
+                        android:textAlignment="viewStart"
+                        android:background="#00ffffff"
+                        android:padding="5dp"
                         android:fontFamily="@font/comfortaa"
-                        android:layout_marginLeft="5dp"/>
+                        />
 
 
                 </TableRow>

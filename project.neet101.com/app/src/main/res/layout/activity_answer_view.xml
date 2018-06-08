@@ -6,225 +6,251 @@
     android:layout_height="match_parent"
     tools:context=".AnswerViewActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/txt_status"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:textSize="15sp"
-            android:textColor="#fff"
-            android:fontFamily="@font/comfortaa"
-            android:textAlignment="center"
-            android:text="INCORRECT"
-            />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/txt_question"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
-            android:textSize="15sp"
-            android:textColor="#000"
-            android:fontFamily="@font/comfortaa"
-            android:text="A capacitor of 2 uF is charged as shown in the diagram. When the switch S is turn to position 2, the percentage of its stored energy dissipated is:"
-            />
-
-        <Button
-            android:id="@+id/btnAddTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#fff"
-            android:text="View Additional Text"
-            android:background="@drawable/button_enable_pink"
-            android:padding="10dp"
-            android:layout_gravity="center"
-            />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginTop="180dp">
-
-        <RadioGroup
-            android:id="@+id/rg"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-
-            <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            <TextView
+                android:id="@+id/txt_status"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="10dp">
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/comfortaa"
+                android:padding="20dp"
+                android:text="INCORRECT"
+                android:textAlignment="center"
+                android:textColor="#fff"
+                android:textSize="15sp" />
 
-                <ImageView
+            <TextView
+                android:id="@+id/txt_question"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/comfortaa"
+                android:padding="20dp"
+                android:text="A capacitor of 2 uF is charged as shown in the diagram. When the switch S is turn to position 2, the percentage of its stored energy dissipated is:"
+                android:textColor="#000"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/btnAddTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/button_enable_pink"
+                android:padding="10dp"
+                android:text="View Additional Text"
+                android:textColor="#fff" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="230dp"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:id="@+id/rg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:src="@mipmap/divider"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    />
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:stretchColumns="1">
 
-                <TableRow
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content">
-
-                    <RadioButton
-                        android:id="@+id/rb_a"
-                        android:button="@null"
-                        android:drawableBottom="@android:drawable/btn_radio"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="-30dp"
-                        />
-
-                    <TextView
-                        android:id="@+id/txt_a"
+                    <ImageView
                         android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@mipmap/divider" />
+
+                    <TableRow
+                        android:id="@+id/tr_a"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:text="A"
-                        android:textSize="17sp"
-                        android:textColor="#000"
-                        android:fontFamily="@font/comfortaa"
-                        android:layout_marginLeft="5dp"/>
+                        android:padding="5dp">
 
-                </TableRow>
+                        <RadioButton
+                            android:id="@+id/rb_a"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="-30dp"
+                            android:button="@null"
+                            android:drawableBottom="@android:drawable/btn_radio" />
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:src="@mipmap/divider"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    />
+                        <TextView
+                            android:id="@+id/txt_a"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="3dp"
+                            android:fontFamily="@font/comfortaa"
+                            android:text="A"
+                            android:textColor="#000"
+                            android:textSize="17sp" />
 
-                <TableRow
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content">
 
-                    <RadioButton
-                        android:id="@+id/rb_b"
-                        android:button="@null"
-                        android:drawableBottom="@android:drawable/btn_radio"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="-30dp"/>
+                    </TableRow>
 
-                    <TextView
-                        android:id="@+id/txt_b"
+                    <ImageView
                         android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@mipmap/divider" />
+
+                    <TableRow
+                        android:id="@+id/tr_b"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:text="B"
-                        android:textSize="17sp"
-                        android:textColor="#000"
-                        android:fontFamily="@font/comfortaa"
-                        android:layout_marginLeft="5dp"/>
+                        android:padding="5dp">
+
+                        <RadioButton
+                            android:id="@+id/rb_b"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="-30dp"
+                            android:button="@null"
+                            android:drawableBottom="@android:drawable/btn_radio" />
+
+                        <TextView
+                            android:id="@+id/txt_b"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="3dp"
+                            android:fontFamily="@font/comfortaa"
+                            android:text="B"
+                            android:textColor="#000"
+                            android:textSize="17sp" />
 
 
-                </TableRow>
+                    </TableRow>
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:src="@mipmap/divider"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    />
-
-                <TableRow
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content">
-
-                    <RadioButton
-                        android:id="@+id/rb_c"
-                        android:button="@null"
-                        android:drawableBottom="@android:drawable/btn_radio"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="-30dp"/>
-
-                    <TextView
-                        android:id="@+id/txt_c"
+                    <ImageView
                         android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@mipmap/divider" />
+
+                    <TableRow
+                        android:id="@+id/tr_c"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:text="C"
-                        android:textSize="17sp"
-                        android:textColor="#000"
-                        android:fontFamily="@font/comfortaa"
-                        android:layout_marginLeft="5dp"/>
+                        android:padding="5dp">
+
+                        <RadioButton
+                            android:id="@+id/rb_c"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="-30dp"
+                            android:button="@null"
+                            android:drawableBottom="@android:drawable/btn_radio" />
+
+                        <TextView
+                            android:id="@+id/txt_c"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="3dp"
+                            android:fontFamily="@font/comfortaa"
+                            android:text="C"
+                            android:textColor="#000"
+                            android:textSize="17sp" />
 
 
-                </TableRow>
+                    </TableRow>
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:src="@mipmap/divider"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    />
-
-                <TableRow
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content">
-
-                    <RadioButton
-                        android:id="@+id/rb_d"
-                        android:button="@null"
-                        android:drawableBottom="@android:drawable/btn_radio"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="-30dp"/>
-
-                    <TextView
-                        android:id="@+id/txt_d"
+                    <ImageView
                         android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@mipmap/divider" />
+
+                    <TableRow
+                        android:id="@+id/tr_d"
+                        android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:text="D"
-                        android:textSize="17sp"
-                        android:textColor="#000"
-                        android:fontFamily="@font/comfortaa"
-                        android:layout_marginLeft="5dp"/>
+                        android:padding="5dp">
+
+                        <RadioButton
+                            android:id="@+id/rb_d"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="-30dp"
+                            android:button="@null"
+                            android:drawableBottom="@android:drawable/btn_radio" />
+
+                        <TextView
+                            android:id="@+id/txt_d"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="3dp"
+                            android:fontFamily="@font/comfortaa"
+                            android:text="D"
+                            android:textColor="#000"
+                            android:textSize="17sp" />
 
 
-                </TableRow>
+                    </TableRow>
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:src="@mipmap/divider"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    />
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:src="@mipmap/divider" />
 
-            </TableLayout>
+                </TableLayout>
 
-        </RadioGroup>
+            </RadioGroup>
 
-    </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="530dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_explanation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/comfortaa"
+                android:padding="20dp"
+                android:text="Explanation"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+
 
     <LinearLayout
         android:id="@+id/btnSubmit"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
         android:layout_weight="1"
         android:gravity="bottom|end"
-        android:layout_alignParentBottom="true"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="bottom|end"
             android:layout_alignParentBottom="true"
+            android:gravity="bottom|end"
             android:orientation="vertical"
             android:stretchColumns="*">
 
@@ -238,28 +264,27 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_enable_pink"
+                    android:text="Don't Know"
                     android:textColor="#fff"
-                    android:textSize="18dp"
-                    android:text="Don't Know" />
+                    android:textSize="18dp" />
 
                 <Button
                     android:id="@+id/btnKnow"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_enable_green"
+                    android:text="Know"
                     android:textColor="#fff"
-                    android:textSize="18dp"
-                    android:text="Know" />
+                    android:textSize="18dp" />
 
                 <Button
                     android:id="@+id/btnSomewhatKnow"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/button_enable_yellow"
+                    android:text="Somewhat Know"
                     android:textColor="#fff"
-                    android:textSize="18dp"
-                    android:text="Somewhat Know" />
-
+                    android:textSize="18dp" />
 
 
             </TableRow>
