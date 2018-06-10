@@ -136,9 +136,7 @@ public class QuestionDashboardActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String JSON) {
             super.onPostExecute(JSON);
-            // Dismiss the progress dialog
-            if (pDialog.isShowing())
-                pDialog.dismiss();
+
 
             try {
                 JSONObject jsonObj = new JSONObject(JSON);
@@ -184,9 +182,9 @@ public class QuestionDashboardActivity extends AppCompatActivity {
 
     }
 
-    public void renderSubjects(List<DashboardSubject> d_subjects) {
+    public Integer ctr = 1;
 
-        Integer ctr = 1;
+    public void renderSubjects(List<DashboardSubject> d_subjects) {
 
         for (DashboardSubject s : d_subjects) {
 
@@ -195,7 +193,7 @@ public class QuestionDashboardActivity extends AppCompatActivity {
             Log.d("Total_Exam", s.Total_Exam + "");
 
 //           String isDownloaded = Helper.Get(QuestionDashboardActivity.this, "downloaded");
-
+//
 //           if(isDownloaded.contains("NO")) {
 //               Integer[] Subjects = new Integer[]
 //               {
@@ -210,10 +208,11 @@ public class QuestionDashboardActivity extends AppCompatActivity {
                             s.SubjectId,
                             s.Total_Exam
                     };
+            new get_questions().execute(Subjects);
 
-            if(s.SubjectId == 1 && s.SubjectId <=3) {
-                new get_questions().execute(Subjects);
-            }
+//            if(s.SubjectId == 1 && s.SubjectId <=3) {
+//                new get_questions().execute(Subjects);
+//            }
             ctr++;
         }
 
@@ -226,10 +225,13 @@ public class QuestionDashboardActivity extends AppCompatActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             // Showing progress dialog
-            pDialog = new ProgressDialog(QuestionDashboardActivity.this);
-            pDialog.setMessage("Please wait...");
-            pDialog.setCancelable(false);
-            pDialog.show();
+
+//            if(ctr == 1) {
+//                pDialog = new ProgressDialog(QuestionDashboardActivity.this);
+//                pDialog.setMessage("Please wait...");
+//                pDialog.setCancelable(false);
+//                pDialog.show();
+//            }
         }
 
         @Override
@@ -283,10 +285,6 @@ public class QuestionDashboardActivity extends AppCompatActivity {
             String JSON = stringList[0];
             String SUB_ID = stringList[1];
 
-            // Dismiss the progress dialog
-            if (pDialog.isShowing())
-                pDialog.dismiss();
-
             try {
 
                 JSONObject jsonObj = new JSONObject(JSON);
@@ -306,9 +304,11 @@ public class QuestionDashboardActivity extends AppCompatActivity {
 
                 Helper.Put(QuestionDashboardActivity.this, "downloaded", "NO");
 
-                Helper.Put(QuestionDashboardActivity.this, "total_question", results.length() + "");
+                Integer total_questions = results.length();
 
-                for(Integer i = 0; i < results.length(); i++) {
+                Helper.Put(QuestionDashboardActivity.this, "total_question", total_questions + "");
+
+                for(Integer i = 0; i < total_questions; i++) {
 
                     JSONObject q = results.getJSONObject(i);
                     Integer qid = q.getInt("id");
@@ -353,7 +353,16 @@ public class QuestionDashboardActivity extends AppCompatActivity {
 
             }
 
+            if(ctr > 2) {
+                done();
+            }
+
         }
 
+    }
+
+    public void done() {
+        if (pDialog.isShowing())
+            pDialog.dismiss();
     }
 }

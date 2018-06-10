@@ -3,6 +3,7 @@ package com.neet101.project;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -28,6 +29,8 @@ public class AnswerViewActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_answer_view);
+
+        get_subject(Helper.SubjectId);
 
         rbt_a = (RadioButton) findViewById(R.id.rb_a);
         rbt_b = (RadioButton) findViewById(R.id.rb_b);
@@ -73,10 +76,11 @@ public class AnswerViewActivity extends AppCompatActivity {
         btnDontKnow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 QuestionActivity.TotalExamTaken++;
-                Intent i = new Intent(getBaseContext(), QuestionActivity.class);
-                startActivity(i);
+
+                Helper.DontKnow++;
+
+                update_status();
             }
         });
 
@@ -85,8 +89,10 @@ public class AnswerViewActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 QuestionActivity.TotalExamTaken++;
-                Intent i = new Intent(getBaseContext(), QuestionActivity.class);
-                startActivity(i);
+
+                Helper.Know++;
+
+                update_status();
             }
         });
 
@@ -95,12 +101,50 @@ public class AnswerViewActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 QuestionActivity.TotalExamTaken++;
-                Intent i = new Intent(getBaseContext(), QuestionActivity.class);
-                startActivity(i);
+
+                Helper.SomewhatKnow++;
+
+                update_status();
             }
         });
 
 
+    }
+
+    public  void update_status() {
+        if(isCorrect) {
+            Helper.Correct++;
+        }
+        else {
+            Helper.Incorrect++;
+        }
+
+        Log.d("TotalExamTaken", QuestionActivity.TotalExamTaken + "");
+
+        Log.d("TotalQuestion", QuestionActivity.TotalQuestion + "");
+
+        if(QuestionActivity.TotalExamTaken >= QuestionActivity.TotalQuestion) {
+            Intent i = new Intent(getBaseContext(), ResultsActivity.class);
+            startActivity(i);
+        }
+        else {
+            Intent i = new Intent(getBaseContext(), QuestionActivity.class);
+            startActivity(i);
+        }
+    }
+
+    public void get_subject(Integer subject_id) {
+        switch (subject_id) {
+            case 1 :
+                this.setTitle("Neet101 - Biology");
+                break;
+            case 2 :
+                this.setTitle("Neet101 - Chemistry");
+                break;
+            case 3 :
+                this.setTitle("Neet101 - Physics");
+                break;
+        }
     }
 
     public void setBackgroundColor(Integer a, boolean correct) {

@@ -18,7 +18,7 @@ public class QuestionActivity extends AppCompatActivity {
 
     RadioButton rbt_a, rbt_b, rbt_c, rbt_d;
 
-    TextView txt_a, txt_b, txt_c, txt_d, txt_question;
+    TextView txt_a, txt_b, txt_c, txt_d, txt_question, txt_exam_count;
 
     RadioButton rbCache;
 
@@ -27,8 +27,8 @@ public class QuestionActivity extends AppCompatActivity {
     public static String Question, choicesA, choicesB, choicesC, choicesD;
 
     public static Integer TotalQuestion;
-
     public static Integer TotalExamTaken;
+
 
     private mySQLite mysqlite;
 
@@ -44,7 +44,9 @@ public class QuestionActivity extends AppCompatActivity {
 
         String total_question = Helper.Get(QuestionActivity.this, "total_question");
 
-        TotalQuestion = Integer.parseInt(total_question);
+        TotalQuestion = Integer.parseInt(total_question) - 1;
+
+        get_subject(Helper.SubjectId);
 
         InitDB();
 
@@ -68,6 +70,7 @@ public class QuestionActivity extends AppCompatActivity {
 
         btnSubmit = (Button) findViewById(R.id.btnSubmit);
 
+        txt_exam_count = (TextView) findViewById(R.id.txt_exam_count);
         txt_question = (TextView) findViewById(R.id.txt_question);
         txt_a = (TextView) findViewById(R.id.txt_a);
         txt_b = (TextView) findViewById(R.id.txt_b);
@@ -79,12 +82,16 @@ public class QuestionActivity extends AppCompatActivity {
         btnC = (Button) findViewById(R.id.btnC);
         btnD = (Button) findViewById(R.id.btnD);
 
+
         Question = questions[3];
         choicesA = questions[4];
         choicesB = questions[5];
         choicesC = questions[6];
         choicesD = questions[7];
 
+
+        String exam_counter = TotalExamTaken + " of " + TotalQuestion;
+        txt_exam_count.setText(exam_counter);
         txt_question.setText(Question);
         btnA.setText(choicesA);
         btnB.setText(choicesB);
@@ -222,5 +229,19 @@ public class QuestionActivity extends AppCompatActivity {
 
 
         //http://cpanel.neet101.com/api/student/random_question?studentid=3&subj_id=1&qcount=5&reference_id=eYYWj2D9gS
+    }
+
+    public void get_subject(Integer subject_id) {
+        switch (subject_id) {
+            case 1 :
+                this.setTitle("Neet101 - Biology");
+                break;
+            case 2 :
+                this.setTitle("Neet101 - Chemistry");
+                break;
+            case 3 :
+                this.setTitle("Neet101 - Physics");
+                break;
+        }
     }
 }

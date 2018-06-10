@@ -12,6 +12,18 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/txt_exam_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:textSize="15sp"
+            android:textColor="#000"
+            android:textAlignment="textEnd"
+            android:fontFamily="@font/comfortaa"
+            android:text="0 of 15"
+            />
+
+        <TextView
             android:id="@+id/txt_question"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -19,6 +31,7 @@
             android:textSize="15sp"
             android:textColor="#000"
             android:fontFamily="@font/comfortaa"
+            android:layout_marginTop="-20dp"
             android:text="A capacitor of 2 uF is charged as shown in the diagram. When the switch S is turn to position 2, the percentage of its stored energy dissipated is:"
             />
 

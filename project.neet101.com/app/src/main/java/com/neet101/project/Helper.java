@@ -25,6 +25,12 @@ public class Helper {
     public static Integer StudentUid;
     public static Integer SubjectId;
 
+    public static Integer Correct = 0;
+    public static Integer Incorrect = 0;
+    public static Integer DontKnow = 0;
+    public static Integer Know = 0;
+    public static Integer SomewhatKnow = 0;
+
     public static List<DashboardSubject> SubjectList;
 
     public static DashboardSubject _Bio;

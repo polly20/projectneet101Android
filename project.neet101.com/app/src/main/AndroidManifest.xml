@@ -66,8 +66,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".QuestionActivity"></activity>
-        <activity android:name=".AnswerViewActivity"></activity>
+        <activity android:name=".QuestionActivity" />
+        <activity android:name=".AnswerViewActivity" />
+        <activity android:name=".ResultsActivity"></activity>
     </application>
 
 </manifest>
