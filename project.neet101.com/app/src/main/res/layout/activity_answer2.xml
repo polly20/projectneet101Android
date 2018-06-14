@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AnswerViewActivity">
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".Answer2Activity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,6 +21,7 @@
             android:text="INCORRECT"
             android:textAlignment="center"
             android:textColor="#fff"
+            android:background="@color/incorrect"
             android:textSize="15sp" />
 
         <TextView
@@ -45,9 +47,9 @@
     </LinearLayout>
 
     <ScrollView
+        android:id="@+id/login_form"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true" >
+        android:layout_height="380dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -239,6 +241,7 @@
 
         </LinearLayout>
 
+
     </ScrollView>
 
     <LinearLayout
@@ -298,4 +301,4 @@
 
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

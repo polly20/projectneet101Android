@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -16,7 +17,9 @@ import org.w3c.dom.Text;
 
 public class QuestionActivity extends AppCompatActivity {
 
-    RadioButton rbt_a, rbt_b, rbt_c, rbt_d;
+//    RadioButton rbt_a, rbt_b, rbt_c, rbt_d;
+
+    ImageView img_a, img_b, img_c, img_d;
 
     TextView txt_a, txt_b, txt_c, txt_d, txt_question, txt_exam_count;
 
@@ -98,120 +101,130 @@ public class QuestionActivity extends AppCompatActivity {
         btnC.setText(choicesC);
         btnD.setText(choicesD);
 
-        AnswerViewActivity.RightAnswer = Integer.parseInt(questions[8]);
+        Answer2Activity.RightAnswer = Integer.parseInt(questions[8]);
 
         Log.d("RightAnswer", questions[8]);
 
-        rbt_a = (RadioButton) findViewById(R.id.rb_a);
-        rbt_b = (RadioButton) findViewById(R.id.rb_b);
-        rbt_c = (RadioButton) findViewById(R.id.rb_c);
-        rbt_d = (RadioButton) findViewById(R.id.rb_d);
+//        rbt_a = (RadioButton) findViewById(R.id.rb_a);
+//        rbt_b = (RadioButton) findViewById(R.id.rb_b);
+//        rbt_c = (RadioButton) findViewById(R.id.rb_c);
+//        rbt_d = (RadioButton) findViewById(R.id.rb_d);
 
-        rbt_a.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("Logs", "a");
+        img_a = (ImageView) findViewById(R.id.img_a);
+        img_b = (ImageView) findViewById(R.id.img_b);
+        img_c = (ImageView) findViewById(R.id.img_c);
+        img_d = (ImageView) findViewById(R.id.img_d);
 
-                AnswerViewActivity.StudentAnswer = 1;
 
-                rbt_b.setChecked(false);
-                rbt_c.setChecked(false);
-                rbt_d.setChecked(false);
-            }
-        });
+//        rbt_a.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Log.d("Logs", "a");
+//
+//                AnswerViewActivity.StudentAnswer = 1;
+//
+//                rbt_b.setChecked(false);
+//                rbt_c.setChecked(false);
+//                rbt_d.setChecked(false);
+//            }
+//        });
 
         btnA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d("Logs", "a");
 
-                AnswerViewActivity.StudentAnswer = 1;
+                Answer2Activity.StudentAnswer = 1;
 
-                rbt_a.setChecked(true);
-                rbt_b.setChecked(false);
-                rbt_c.setChecked(false);
-                rbt_d.setChecked(false);
+                img_a.setImageResource(R.mipmap.selected_icon);
+                img_b.setImageResource(R.mipmap.not_selected_icon);
+                img_c.setImageResource(R.mipmap.not_selected_icon);
+                img_d.setImageResource(R.mipmap.not_selected_icon);
+
             }
         });
 
-        rbt_b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("Logs", "b");
-
-                AnswerViewActivity.StudentAnswer = 2;
-
-                rbt_a.setChecked(false);
-                rbt_c.setChecked(false);
-                rbt_d.setChecked(false);
-            }
-        });
+//        rbt_b.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Log.d("Logs", "b");
+//
+//                AnswerViewActivity.StudentAnswer = 2;
+//
+//                rbt_a.setChecked(false);
+//                rbt_c.setChecked(false);
+//                rbt_d.setChecked(false);
+//            }
+//        });
 
         btnB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d("Logs", "a");
 
-                AnswerViewActivity.StudentAnswer = 2;
+                Answer2Activity.StudentAnswer = 2;
 
-                rbt_a.setChecked(false);
-                rbt_b.setChecked(true);
-                rbt_c.setChecked(false);
-                rbt_d.setChecked(false);
+                img_a.setImageResource(R.mipmap.not_selected_icon);
+                img_b.setImageResource(R.mipmap.selected_icon);
+                img_c.setImageResource(R.mipmap.not_selected_icon);
+                img_d.setImageResource(R.mipmap.not_selected_icon);
+
             }
         });
 
-        rbt_c.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("Logs", "c");
-
-                AnswerViewActivity.StudentAnswer = 3;
-
-                rbt_a.setChecked(false);
-                rbt_b.setChecked(false);
-                rbt_d.setChecked(false);
-            }
-        });
+//        rbt_c.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Log.d("Logs", "c");
+//
+//                AnswerViewActivity.StudentAnswer = 3;
+//
+//                rbt_a.setChecked(false);
+//                rbt_b.setChecked(false);
+//                rbt_d.setChecked(false);
+//            }
+//        });
 
         btnC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d("Logs", "a");
 
-                AnswerViewActivity.StudentAnswer = 3;
+                Answer2Activity.StudentAnswer = 3;
 
-                rbt_a.setChecked(false);
-                rbt_b.setChecked(false);
-                rbt_c.setChecked(true);
-                rbt_d.setChecked(false);
+                img_a.setImageResource(R.mipmap.not_selected_icon);
+                img_b.setImageResource(R.mipmap.not_selected_icon);
+                img_c.setImageResource(R.mipmap.selected_icon);
+                img_d.setImageResource(R.mipmap.not_selected_icon);
+
             }
         });
 
-        rbt_d.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("Logs", "d");
-
-                AnswerViewActivity.StudentAnswer = 4;
-
-                rbt_a.setChecked(false);
-                rbt_b.setChecked(false);
-                rbt_c.setChecked(false);
-            }
-        });
+//        rbt_d.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Log.d("Logs", "d");
+//
+//                AnswerViewActivity.StudentAnswer = 4;
+//
+//                rbt_a.setChecked(false);
+//                rbt_b.setChecked(false);
+//                rbt_c.setChecked(false);
+//            }
+//        });
 
         btnD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.d("Logs", "a");
 
-                AnswerViewActivity.StudentAnswer = 4;
+                Answer2Activity.StudentAnswer = 4;
 
-                rbt_a.setChecked(false);
-                rbt_b.setChecked(false);
-                rbt_c.setChecked(false);
-                rbt_d.setChecked(true);
+                img_a.setImageResource(R.mipmap.not_selected_icon);
+                img_b.setImageResource(R.mipmap.not_selected_icon);
+                img_c.setImageResource(R.mipmap.not_selected_icon);
+                img_d.setImageResource(R.mipmap.selected_icon);
+
             }
         });
 
@@ -220,7 +233,7 @@ public class QuestionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Log.d("Logs", "d");
 
-                Intent i = new Intent(getBaseContext(), AnswerViewActivity.class);
+                Intent i = new Intent(getBaseContext(), Answer2Activity.class);
                 startActivity(i);
             }
         });

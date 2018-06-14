@@ -67,8 +67,17 @@
             </intent-filter>
         </activity>
         <activity android:name=".QuestionActivity" />
-        <activity android:name=".AnswerViewActivity" />
-        <activity android:name=".ResultsActivity"></activity>
+        <activity android:name=".AnswerViewActivity" >
+
+        </activity>
+
+
+        <activity android:name=".ResultsActivity" />
+        <activity
+            android:name=".Answer2Activity"
+            android:label="@string/title_activity_answer2">
+
+        </activity>
     </application>
 
 </manifest>
