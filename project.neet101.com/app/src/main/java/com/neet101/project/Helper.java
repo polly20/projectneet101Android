@@ -20,9 +20,11 @@ import java.util.regex.Pattern;
 
 public class Helper {
 
+    public static String Api_Url = "http://217f2f4e.ap.ngrok.io";
+
     private static SharedPreferences sharedPref;
 
-    public static Integer StudentUid;
+    public static Integer StudentUid = 5;
     public static Integer SubjectId;
 
     public static Integer Correct = 0;

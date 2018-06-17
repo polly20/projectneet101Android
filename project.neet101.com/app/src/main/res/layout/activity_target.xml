@@ -92,7 +92,7 @@
                 android:drawableBottom="@android:drawable/btn_radio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="50%"
+                android:text="50"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:padding="10dp"
@@ -106,7 +106,7 @@
                 android:drawableBottom="@android:drawable/btn_radio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="60%"
+                android:text="60"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:padding="10dp"
@@ -120,7 +120,7 @@
                 android:drawableBottom="@android:drawable/btn_radio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="70%"
+                android:text="70"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:padding="10dp"
@@ -134,7 +134,7 @@
                 android:drawableBottom="@android:drawable/btn_radio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="80%"
+                android:text="80"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:padding="10dp"
@@ -148,7 +148,7 @@
                 android:drawableBottom="@android:drawable/btn_radio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="90%"
+                android:text="90"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:padding="10dp"
@@ -162,7 +162,7 @@
                 android:drawableBottom="@android:drawable/btn_radio"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="100%"
+                android:text="100"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:padding="10dp"
@@ -171,6 +171,30 @@
                 />
 
         </RadioGroup>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_weight="1"
+        android:gravity="bottom|end"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnSubmit"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_enable_pink"
+            android:layout_gravity="center"
+            android:text="Submit"
+            android:textSize="19sp"
+            android:textColor="#fff"
+            android:fontFamily="@font/comfortaa"
+            android:layout_marginBottom="10dp"
+            />
 
     </LinearLayout>
 

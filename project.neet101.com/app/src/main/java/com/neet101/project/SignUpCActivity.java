@@ -136,8 +136,10 @@ public class SignUpCActivity extends AppCompatActivity {
 
             HttpHandler sh = new HttpHandler(defAccount[0], defAccount[1]);
 
+            String url = Helper.Api_Url + "/api/registration?" + data;
+
             // Making a request to url and getting response
-            String jsonStr = sh.makeServiceCall("http://cpanel.neet101.com/api/registration?" + data, "POST", _context);
+            String jsonStr = sh.makeServiceCall(url, "POST", _context);
 
             Log.e(TAG, "data: " + data);
             Log.e(TAG, "jsonStr: " + jsonStr);

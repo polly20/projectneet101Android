@@ -28,6 +28,14 @@ public class RecommendActivity extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
+        String target = Helper.Get(RecommendActivity.this, "target");
+
+        txtValue = (EditText) findViewById(R.id.txtValue);
+
+        override_target(target);
+
+        getRadionButton(Integer.parseInt(target));
+
         RadioGroup rg = (RadioGroup) findViewById(R.id.rg);
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -51,16 +59,54 @@ public class RecommendActivity extends AppCompatActivity {
     }
 
     public void override_target(String value) {
-        txtValue = (EditText) findViewById(R.id.txtValue);
         txtValue.setText(value.toString());
     }
 
-    public String getRadionButton(Integer val) {
+    public void getRadionButton(Integer val) {
 
-        if(val > 0 && val <= 20) {
-
+        if(val >= 0 && val <= 29) {
+            rbt_20 = (RadioButton)findViewById(R.id.rb_20);
+            rbt_20.setChecked(true);
         }
 
-        return null;
+        if(val >= 30 && val <= 39) {
+            rbt_30 = (RadioButton)findViewById(R.id.rb_30);
+            rbt_30.setChecked(true);
+        }
+
+        if(val >= 40 && val <= 49) {
+            rbt_40 = (RadioButton)findViewById(R.id.rb_40);
+            rbt_40.setChecked(true);
+        }
+
+        if(val >= 50 && val <= 59) {
+            rbt_50 = (RadioButton)findViewById(R.id.rb_50);
+            rbt_50.setChecked(true);
+        }
+
+        if(val >= 60 && val <= 69) {
+            rbt_60 = (RadioButton)findViewById(R.id.rb_60);
+            rbt_60.setChecked(true);
+        }
+
+        if(val >= 70 && val <= 79) {
+            rbt_70 = (RadioButton)findViewById(R.id.rb_70);
+            rbt_70.setChecked(true);
+        }
+
+        if(val >= 80 && val <= 89) {
+            rbt_80 = (RadioButton)findViewById(R.id.rb_80);
+            rbt_80.setChecked(true);
+        }
+
+        if(val >= 90 && val <= 99) {
+            rbt_90 = (RadioButton)findViewById(R.id.rb_90);
+            rbt_90.setChecked(true);
+        }
+
+        if(val >= 100) {
+            rbt_100 = (RadioButton)findViewById(R.id.rb_100);
+            rbt_100.setChecked(true);
+        }
     }
 }

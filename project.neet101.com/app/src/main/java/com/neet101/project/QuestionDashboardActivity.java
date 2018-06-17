@@ -40,7 +40,7 @@ public class QuestionDashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_dashboard);
 
-        Helper.StudentUid = 3;
+        Helper.StudentUid = 5;
         QuestionActivity.TotalExamTaken = 0;
 
         _context = getApplicationContext();
@@ -83,7 +83,10 @@ public class QuestionDashboardActivity extends AppCompatActivity {
         mySQLite.isClearTable = true;
         CreatedDB();
 
-        new checking_account().execute();
+        String isDownloaded = Helper.Get(QuestionDashboardActivity.this, "downloaded");
+        if(isDownloaded.contains("YES")) {
+            new checking_account().execute();
+        }
     }
 
     public void CreatedDB() {
@@ -111,8 +114,10 @@ public class QuestionDashboardActivity extends AppCompatActivity {
 
             HttpHandler sh = new HttpHandler(null, null);
 
+            String url = Helper.Api_Url + "/api/student/v1/question_dashboard?studentid=" + Helper.StudentUid;
+
             // Making a request to url and getting response
-            String jsonStr = sh.makeServiceCall("http://cpanel.neet101.com/api/student/v1/question_dashboard?studentid=" + Helper.StudentUid, "GET", _context);
+            String jsonStr = sh.makeServiceCall(url, "GET", _context);
 
             if (jsonStr != null) {
                 Log.e(TAG, "Response from url: " + jsonStr);
@@ -192,17 +197,6 @@ public class QuestionDashboardActivity extends AppCompatActivity {
             Log.d("Subject", s.Subject);
             Log.d("Total_Exam", s.Total_Exam + "");
 
-//           String isDownloaded = Helper.Get(QuestionDashboardActivity.this, "downloaded");
-//
-//           if(isDownloaded.contains("NO")) {
-//               Integer[] Subjects = new Integer[]
-//               {
-//                       s.SubjectId,
-//                       s.Total_Exam
-//               };
-//               new get_questions().execute(Subjects);
-//           }
-
             Integer[] Subjects = new Integer[]
                     {
                             s.SubjectId,
@@ -210,9 +204,6 @@ public class QuestionDashboardActivity extends AppCompatActivity {
                     };
             new get_questions().execute(Subjects);
 
-//            if(s.SubjectId == 1 && s.SubjectId <=3) {
-//                new get_questions().execute(Subjects);
-//            }
             ctr++;
         }
 
@@ -246,13 +237,15 @@ public class QuestionDashboardActivity extends AppCompatActivity {
 
             HttpHandler sh = new HttpHandler(null, null);
 
-            String url_ = "http://cpanel.neet101.com/api/student/v1/random_question?studentid="+ Helper.StudentUid +"&subj_id="+ Subject_Id +"&qcount="+ Subject_Count +"&reference_id=" + ExamReference;
+            String url = Helper.Api_Url + "/api/student/v1/random_question?studentid="+ Helper.StudentUid +"&subj_id="+ Subject_Id +"&qcount="+ Subject_Count +"&reference_id=" + ExamReference;
+
+//            String url_ = "http://cpanel.neet101.com/api/student/v1/random_question?studentid="+ Helper.StudentUid +"&subj_id="+ Subject_Id +"&qcount="+ Subject_Count +"&reference_id=" + ExamReference;
 
             // Making a request to url and getting response
-            String jsonStr = sh.makeServiceCall(url_, "GET", _context);
+            String jsonStr = sh.makeServiceCall(url, "GET", _context);
 
             if (jsonStr != null) {
-                Log.e(TAG, "Response url: " + url_);
+                Log.e(TAG, "Response url: " + url);
 
                 Log.e(TAG, "Response from url: " + jsonStr);
 
@@ -331,10 +324,7 @@ public class QuestionDashboardActivity extends AppCompatActivity {
                     Log.d("keyname" , keyname);
 
                     Helper.Put(QuestionDashboardActivity.this, keyname, strQuery);
-
-                    Helper.Put(QuestionDashboardActivity.this, "downloaded", "YES");
                 }
-
 
                 Log.d("SUB_ID" , SUB_ID + "");
                 Log.d("results" , results + "");
@@ -362,6 +352,9 @@ public class QuestionDashboardActivity extends AppCompatActivity {
     }
 
     public void done() {
+
+        Helper.Put(QuestionDashboardActivity.this, "downloaded", "YES");
+
         if (pDialog.isShowing())
             pDialog.dismiss();
     }

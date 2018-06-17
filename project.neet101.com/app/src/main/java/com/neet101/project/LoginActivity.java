@@ -326,8 +326,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             HttpHandler sh = new HttpHandler(mEmail, mPassword);
 
+            String url = Helper.Api_Url + "/api/login";
+
             // Making a request to url and getting response
-            String jsonStr = sh.makeServiceCall("http://cpanel.neet101.com/api/login", "POST", _context);
+            String jsonStr = sh.makeServiceCall(url, "POST", _context);
 
             Log.e(TAG, "jsonStr: " + jsonStr);
 
