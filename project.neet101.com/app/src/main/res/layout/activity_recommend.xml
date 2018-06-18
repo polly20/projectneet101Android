@@ -212,7 +212,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="550dp"
+        android:layout_alignParentBottom="true"
+        android:layout_weight="1"
+        android:gravity="bottom|end"
         android:orientation="vertical">
 
         <Button
@@ -225,6 +227,7 @@
             android:textSize="19sp"
             android:textColor="#fff"
             android:fontFamily="@font/comfortaa"
+            android:layout_marginBottom="10dp"
             />
 
     </LinearLayout>

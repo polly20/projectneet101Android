@@ -39,6 +39,15 @@ public class TargetActivity extends AppCompatActivity {
 
         _context = getApplicationContext();
 
+        Helper.Put(TargetActivity.this, "downloaded", "NO");
+
+        target = Helper.Get(TargetActivity.this, "target");
+
+        if(target.length() > 0) {
+            Intent i = new Intent(getBaseContext(), QuestionDashboardActivity.class);
+            startActivity(i);
+        }
+
         RadioGroup rg = (RadioGroup) findViewById(R.id.rg);
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             public void onCheckedChanged(RadioGroup group, int checkedId) {

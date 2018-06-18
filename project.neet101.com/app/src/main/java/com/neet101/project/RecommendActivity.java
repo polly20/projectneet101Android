@@ -30,11 +30,13 @@ public class RecommendActivity extends AppCompatActivity {
 
         String target = Helper.Get(RecommendActivity.this, "target");
 
+        String recommended = Helper.Get(RecommendActivity.this, "recommended");
+
         txtValue = (EditText) findViewById(R.id.txtValue);
 
-        override_target(target);
+        override_target(recommended);
 
-        getRadionButton(Integer.parseInt(target));
+        getRadionButton(Integer.parseInt(recommended));
 
         RadioGroup rg = (RadioGroup) findViewById(R.id.rg);
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -51,8 +53,10 @@ public class RecommendActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 String value = txtValue.getText().toString();
-
                 Log.d("Logs", value);
+
+                Intent i = new Intent(getBaseContext(), QuestionDashboardActivity.class);
+                startActivity(i);
 
             }
         });

@@ -20,12 +20,20 @@ import java.util.regex.Pattern;
 
 public class Helper {
 
-    public static String Api_Url = "http://217f2f4e.ap.ngrok.io";
+    public static String Api_Url = "http://192.168.1.124:8024";
 
     private static SharedPreferences sharedPref;
 
     public static Integer StudentUid = 5;
+    public static Integer BioMaxQuestions;
+    public static Integer PhyMaxQuestions;
+    public static Integer CheMaxQuestions;
     public static Integer SubjectId;
+
+    public static Integer MaxQuestionsPerDay = 0;
+    public static Integer TotalQuestion = 0;
+    public static Integer TotalQuestionOnCount = 0;
+    public static Integer TotalExamTaken = 0;
 
     public static Integer Correct = 0;
     public static Integer Incorrect = 0;

@@ -27,10 +27,9 @@ public class QuestionActivity extends AppCompatActivity {
 
     Button btnSubmit, btnA, btnB, btnC, btnD;
 
+
     public static String Question, choicesA, choicesB, choicesC, choicesD;
 
-    public static Integer TotalQuestion;
-    public static Integer TotalExamTaken;
 
 
     private mySQLite mysqlite;
@@ -47,13 +46,15 @@ public class QuestionActivity extends AppCompatActivity {
 
         String total_question = Helper.Get(QuestionActivity.this, "total_question");
 
-        TotalQuestion = Integer.parseInt(total_question) - 1;
-
         get_subject(Helper.SubjectId);
+
+        Helper.TotalQuestion = Helper.MaxQuestionsPerDay; // Integer.parseInt(total_question);
+
+        Helper.TotalQuestionOnCount = Integer.parseInt(total_question) - 1;
 
         InitDB();
 
-        Integer code = TotalQuestion - (TotalQuestion - TotalExamTaken);
+        Integer code = Helper.TotalQuestionOnCount - (Helper.TotalQuestionOnCount - Helper.TotalExamTaken);
 
         String question_key = Helper.SubjectId + "kpa" + code;
 
@@ -93,7 +94,7 @@ public class QuestionActivity extends AppCompatActivity {
         choicesD = questions[7];
 
 
-        String exam_counter = TotalExamTaken + " of " + TotalQuestion;
+        String exam_counter = Helper.TotalExamTaken + " of " + Helper.TotalQuestion;
         txt_exam_count.setText(exam_counter);
         txt_question.setText(Question);
         btnA.setText(choicesA);
@@ -101,33 +102,14 @@ public class QuestionActivity extends AppCompatActivity {
         btnC.setText(choicesC);
         btnD.setText(choicesD);
 
-        Answer2Activity.RightAnswer = Integer.parseInt(questions[8]);
-
         Log.d("RightAnswer", questions[8]);
 
-//        rbt_a = (RadioButton) findViewById(R.id.rb_a);
-//        rbt_b = (RadioButton) findViewById(R.id.rb_b);
-//        rbt_c = (RadioButton) findViewById(R.id.rb_c);
-//        rbt_d = (RadioButton) findViewById(R.id.rb_d);
+        Answer2Activity.RightAnswer = Integer.parseInt(questions[8]);
 
         img_a = (ImageView) findViewById(R.id.img_a);
         img_b = (ImageView) findViewById(R.id.img_b);
         img_c = (ImageView) findViewById(R.id.img_c);
         img_d = (ImageView) findViewById(R.id.img_d);
-
-
-//        rbt_a.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Log.d("Logs", "a");
-//
-//                AnswerViewActivity.StudentAnswer = 1;
-//
-//                rbt_b.setChecked(false);
-//                rbt_c.setChecked(false);
-//                rbt_d.setChecked(false);
-//            }
-//        });
 
         btnA.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,19 +126,6 @@ public class QuestionActivity extends AppCompatActivity {
             }
         });
 
-//        rbt_b.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Log.d("Logs", "b");
-//
-//                AnswerViewActivity.StudentAnswer = 2;
-//
-//                rbt_a.setChecked(false);
-//                rbt_c.setChecked(false);
-//                rbt_d.setChecked(false);
-//            }
-//        });
-
         btnB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -172,18 +141,6 @@ public class QuestionActivity extends AppCompatActivity {
             }
         });
 
-//        rbt_c.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Log.d("Logs", "c");
-//
-//                AnswerViewActivity.StudentAnswer = 3;
-//
-//                rbt_a.setChecked(false);
-//                rbt_b.setChecked(false);
-//                rbt_d.setChecked(false);
-//            }
-//        });
 
         btnC.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -199,19 +156,6 @@ public class QuestionActivity extends AppCompatActivity {
 
             }
         });
-
-//        rbt_d.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Log.d("Logs", "d");
-//
-//                AnswerViewActivity.StudentAnswer = 4;
-//
-//                rbt_a.setChecked(false);
-//                rbt_b.setChecked(false);
-//                rbt_c.setChecked(false);
-//            }
-//        });
 
         btnD.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -238,21 +182,21 @@ public class QuestionActivity extends AppCompatActivity {
             }
         });
 
-        Log.d("TotalQuestion", TotalQuestion + "");
-
-
-        //http://cpanel.neet101.com/api/student/random_question?studentid=3&subj_id=1&qcount=5&reference_id=eYYWj2D9gS
+        Log.d("TotalQuestion", Helper.TotalQuestion + "");
     }
 
     public void get_subject(Integer subject_id) {
         switch (subject_id) {
             case 1 :
+                Helper.MaxQuestionsPerDay = Helper.BioMaxQuestions;
                 this.setTitle("Neet101 - Biology");
                 break;
             case 2 :
+                Helper.MaxQuestionsPerDay = Helper.CheMaxQuestions;
                 this.setTitle("Neet101 - Chemistry");
                 break;
             case 3 :
+                Helper.MaxQuestionsPerDay = Helper.PhyMaxQuestions;
                 this.setTitle("Neet101 - Physics");
                 break;
         }

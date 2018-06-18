@@ -41,7 +41,7 @@ public class QuestionDashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_question_dashboard);
 
         Helper.StudentUid = 5;
-        QuestionActivity.TotalExamTaken = 0;
+        Helper.TotalExamTaken = 0;
 
         _context = getApplicationContext();
 
@@ -53,9 +53,15 @@ public class QuestionDashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Helper.SubjectId = 1;
-                Intent i = new Intent(getBaseContext(), QuestionActivity.class);
-                startActivity(i);
+                if(!validate(1)) {
+                    Toast.makeText(_context,"Oops, You don't have question for today",
+                            Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Helper.SubjectId = 1;
+                    Intent i = new Intent(getBaseContext(), QuestionActivity.class);
+                    startActivity(i);
+                }
             }
         });
 
@@ -63,9 +69,15 @@ public class QuestionDashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Helper.SubjectId = 2;
-                Intent i = new Intent(getBaseContext(), QuestionActivity.class);
-                startActivity(i);
+                if(!validate(2)) {
+                    Toast.makeText(_context,"Oops, You don't have question for today",
+                            Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Helper.SubjectId = 2;
+                    Intent i = new Intent(getBaseContext(), QuestionActivity.class);
+                    startActivity(i);
+                }
             }
         });
 
@@ -73,26 +85,114 @@ public class QuestionDashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Helper.SubjectId = 3;
-                Intent i = new Intent(getBaseContext(), QuestionActivity.class);
-                startActivity(i);
+                if(!validate(3)) {
+                    Toast.makeText(_context,"Oops, You don't have question for today",
+                            Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Helper.SubjectId = 3;
+                    Intent i = new Intent(getBaseContext(), QuestionActivity.class);
+                    startActivity(i);
+                }
             }
         });
-
 
         mySQLite.isClearTable = true;
         CreatedDB();
 
         String isDownloaded = Helper.Get(QuestionDashboardActivity.this, "downloaded");
-        if(isDownloaded.contains("YES")) {
+        if(isDownloaded.contains("NO")) {
             new checking_account().execute();
         }
+        else {
+            String BioMaxQuestions = Helper.Get(QuestionDashboardActivity.this, "BioMaxQuestions");
+            String CheMaxQuestions = Helper.Get(QuestionDashboardActivity.this, "CheMaxQuestions");
+            String PhyMaxQuestions = Helper.Get(QuestionDashboardActivity.this, "PhyMaxQuestions");
+
+            Helper.BioMaxQuestions = Integer.parseInt(BioMaxQuestions);
+            Helper.CheMaxQuestions = Integer.parseInt(CheMaxQuestions);
+            Helper.PhyMaxQuestions = Integer.parseInt(PhyMaxQuestions);
+        }
+    }
+
+    public boolean validate(Integer subject_id) {
+
+        Helper.MaxQuestionsPerDay = get_subject(subject_id);
+
+        Log.d("MaxQuestionsPerDay", Helper.MaxQuestionsPerDay.toString());
+
+        Integer taken = get_exam_count(subject_id);
+
+        Log.d("taken", taken.toString());
+
+        if(taken >= Helper.MaxQuestionsPerDay) {
+            return false;
+        }
+        return true;
+    }
+
+    public int get_subject(Integer subject_id) {
+
+        int q = 0;
+
+        switch (subject_id) {
+            case 1 :
+                q = Helper.BioMaxQuestions;
+                break;
+            case 2 :
+                q = Helper.CheMaxQuestions;
+                break;
+            case 3 :
+                q = Helper.PhyMaxQuestions;
+                break;
+        }
+
+        return q;
+    }
+
+    public int get_exam_count(Integer subject_id) {
+
+        Integer c = 0;
+
+        if(subject_id == 1) {
+
+           String BioExamCount = Helper.Get(QuestionDashboardActivity.this, "BioExamCount");
+
+           Log.d("BioExamCount", BioExamCount);
+
+           if(BioExamCount.length() > 0) {
+               c = Integer.parseInt(BioExamCount);
+           }
+        }
+
+        if(subject_id == 2) {
+
+            String CheExamCount = Helper.Get(QuestionDashboardActivity.this, "CheExamCount");
+
+            Log.d("CheExamCount", CheExamCount);
+
+            if(CheExamCount.length() > 0) {
+                c = Integer.parseInt(CheExamCount);
+            }
+        }
+
+        if(subject_id == 3) {
+
+            String PhyExamCount = Helper.Get(QuestionDashboardActivity.this, "PhyExamCount");
+
+            Log.d("PhyExamCount", PhyExamCount);
+
+            if(PhyExamCount.length() > 0) {
+                c = Integer.parseInt(PhyExamCount);
+            }
+        }
+
+        return c;
     }
 
     public void CreatedDB() {
         SQLiteDatabase sqlDB = openOrCreateDatabase(mySQLite.DB_NAME, Context.MODE_PRIVATE, null);
         mysqlite = new mySQLite(sqlDB, true);
-
     }
 
     private class checking_account extends AsyncTask<Void, Void, String> {
@@ -197,6 +297,24 @@ public class QuestionDashboardActivity extends AppCompatActivity {
             Log.d("Subject", s.Subject);
             Log.d("Total_Exam", s.Total_Exam + "");
 
+            if(s.SubjectId == 1) {
+                Helper.BioMaxQuestions = s.Total_Exam;
+
+                Helper.Put(QuestionDashboardActivity.this, "BioMaxQuestions", s.Total_Exam.toString());
+            }
+
+            if(s.SubjectId == 2) {
+                Helper.CheMaxQuestions = s.Total_Exam;
+
+                Helper.Put(QuestionDashboardActivity.this, "CheMaxQuestions", s.Total_Exam.toString());
+            }
+
+            if(s.SubjectId == 3) {
+                Helper.PhyMaxQuestions = s.Total_Exam;
+
+                Helper.Put(QuestionDashboardActivity.this, "PhyMaxQuestions", s.Total_Exam.toString());
+            }
+
             Integer[] Subjects = new Integer[]
                     {
                             s.SubjectId,
@@ -206,8 +324,6 @@ public class QuestionDashboardActivity extends AppCompatActivity {
 
             ctr++;
         }
-
-        
     }
 
     private class get_questions extends AsyncTask<Integer, Void, String[]> {

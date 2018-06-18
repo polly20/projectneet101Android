@@ -105,7 +105,7 @@ public class Answer2Activity extends AppCompatActivity  {
         btnDontKnow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                QuestionActivity.TotalExamTaken++;
+                Helper.TotalExamTaken++;
 
                 Helper.DontKnow++;
 
@@ -117,7 +117,7 @@ public class Answer2Activity extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
 
-                QuestionActivity.TotalExamTaken++;
+                Helper.TotalExamTaken++;
 
                 Helper.Know++;
 
@@ -129,7 +129,7 @@ public class Answer2Activity extends AppCompatActivity  {
             @Override
             public void onClick(View view) {
 
-                QuestionActivity.TotalExamTaken++;
+                Helper.TotalExamTaken++;
 
                 Helper.SomewhatKnow++;
 
@@ -147,11 +147,14 @@ public class Answer2Activity extends AppCompatActivity  {
             Helper.Incorrect++;
         }
 
-        Log.d("TotalExamTaken", QuestionActivity.TotalExamTaken + "");
+        Log.d("TotalExamTaken", Helper.TotalExamTaken + "");
 
-        Log.d("TotalQuestion", QuestionActivity.TotalQuestion + "");
+        Log.d("TotalQuestion", Helper.TotalQuestion + "");
 
-        if(QuestionActivity.TotalExamTaken >= QuestionActivity.TotalQuestion) {
+        if(Helper.TotalExamTaken >= Helper.TotalQuestion) {
+
+            update_exam_count(Helper.TotalExamTaken);
+
             Intent i = new Intent(getBaseContext(), ResultsActivity.class);
             startActivity(i);
         }
@@ -172,6 +175,23 @@ public class Answer2Activity extends AppCompatActivity  {
             case 3 :
                 this.setTitle("Neet101 - Physics");
                 break;
+        }
+    }
+
+    public void update_exam_count(Integer exam_count) {
+        if(Helper.SubjectId == 1) {
+
+            Helper.Put(Answer2Activity.this, "BioExamCount", exam_count.toString());
+        }
+
+        if(Helper.SubjectId == 2) {
+
+            Helper.Put(Answer2Activity.this, "CheExamCount", exam_count.toString());
+        }
+
+        if(Helper.SubjectId == 3) {
+
+            Helper.Put(Answer2Activity.this, "PhyExamCount", exam_count.toString());
         }
     }
 
