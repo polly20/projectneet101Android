@@ -152,15 +152,18 @@ public class Answer2Activity extends AppCompatActivity  {
         Log.d("TotalQuestion", Helper.TotalQuestion + "");
 
         if(Helper.TotalExamTaken >= Helper.TotalQuestion) {
-
             update_exam_count(Helper.TotalExamTaken);
 
             Intent i = new Intent(getBaseContext(), ResultsActivity.class);
             startActivity(i);
+
+            finish();
         }
         else {
             Intent i = new Intent(getBaseContext(), QuestionActivity.class);
             startActivity(i);
+
+            finish();
         }
     }
 

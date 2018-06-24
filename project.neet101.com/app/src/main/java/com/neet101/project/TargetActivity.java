@@ -41,11 +41,21 @@ public class TargetActivity extends AppCompatActivity {
 
         Helper.Put(TargetActivity.this, "downloaded", "NO");
 
+        String UID_ = Helper.Get(TargetActivity.this, "UID");
+
+        Log.d("StudentUid", UID_ + "");
+
+        Integer StudentUid = Integer.parseInt(UID_);
+
+        Helper.StudentUid = StudentUid;
+
         target = Helper.Get(TargetActivity.this, "target");
 
         if(target.length() > 0) {
             Intent i = new Intent(getBaseContext(), QuestionDashboardActivity.class);
             startActivity(i);
+
+            finish();
         }
 
         RadioGroup rg = (RadioGroup) findViewById(R.id.rg);
@@ -154,11 +164,12 @@ public class TargetActivity extends AppCompatActivity {
     }
 
     public void done() {
-
         if (pDialog.isShowing())
             pDialog.dismiss();
 
         Intent i = new Intent(getBaseContext(), RecommendActivity.class);
         startActivity(i);
+
+        finish();
     }
 }

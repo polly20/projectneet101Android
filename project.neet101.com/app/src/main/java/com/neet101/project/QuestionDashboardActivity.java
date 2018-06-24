@@ -40,7 +40,16 @@ public class QuestionDashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_dashboard);
 
-        Helper.StudentUid = 5;
+        Helper.Get(QuestionDashboardActivity.this, "UID");
+
+        String UID_ = Helper.Get(QuestionDashboardActivity.this, "UID");
+
+        Log.d("StudentUid", UID_ + "");
+
+        Integer StudentUid = Integer.parseInt(UID_);
+
+        Helper.StudentUid = StudentUid;
+
         Helper.TotalExamTaken = 0;
 
         _context = getApplicationContext();
@@ -61,6 +70,8 @@ public class QuestionDashboardActivity extends AppCompatActivity {
                     Helper.SubjectId = 1;
                     Intent i = new Intent(getBaseContext(), QuestionActivity.class);
                     startActivity(i);
+
+                    finish();
                 }
             }
         });
@@ -77,6 +88,8 @@ public class QuestionDashboardActivity extends AppCompatActivity {
                     Helper.SubjectId = 2;
                     Intent i = new Intent(getBaseContext(), QuestionActivity.class);
                     startActivity(i);
+
+                    finish();
                 }
             }
         });
@@ -93,6 +106,8 @@ public class QuestionDashboardActivity extends AppCompatActivity {
                     Helper.SubjectId = 3;
                     Intent i = new Intent(getBaseContext(), QuestionActivity.class);
                     startActivity(i);
+
+                    finish();
                 }
             }
         });

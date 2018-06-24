@@ -179,6 +179,8 @@ public class QuestionActivity extends AppCompatActivity {
 
                 Intent i = new Intent(getBaseContext(), Answer2Activity.class);
                 startActivity(i);
+
+                finish();
             }
         });
 

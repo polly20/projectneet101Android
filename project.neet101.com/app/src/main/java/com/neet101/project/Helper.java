@@ -24,7 +24,7 @@ public class Helper {
 
     private static SharedPreferences sharedPref;
 
-    public static Integer StudentUid = 5;
+    public static Integer StudentUid;
     public static Integer BioMaxQuestions;
     public static Integer PhyMaxQuestions;
     public static Integer CheMaxQuestions;

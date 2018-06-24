@@ -108,6 +108,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(getBaseContext(), LoginActivity.class);
                 startActivity(i);
+
+                finish();
+
             }
         });
 
@@ -123,6 +126,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(getBaseContext(), SignUpAActivity.class);
                 startActivity(i);
+
+                finish();
             }
         });
 
@@ -224,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
             HttpHandler sh = new HttpHandler(defAccount[0], defAccount[1]);
 
             // Making a request to url and getting response
-            String jsonStr = sh.makeServiceCall("http://cpanel.neet101.com/api/login/validation?account=" + email, "POST", _context);
+            String jsonStr = sh.makeServiceCall(Helper.Api_Url + "/api/login/validation?account=" + email, "POST", _context);
 
             if (jsonStr != null) {
                 Log.e(TAG, "Response from url: " + jsonStr);
@@ -265,11 +270,18 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent main;
 
+
                 if(Integer.parseInt(status) != 200) {
                     main = new Intent(MainActivity.this, SignUpAActivity.class);
                 }
                 else {
                     main = new Intent(MainActivity.this, DashboardActivity.class);
+
+                    Integer StudentUid = jsonObj.getInt("UID");
+
+                    Log.d("StudentUid", StudentUid + "");
+
+                    Helper.Put(MainActivity.this, "UID", StudentUid.toString());
                 }
 
                 startActivity(main);

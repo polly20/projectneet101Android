@@ -37,6 +37,8 @@ public class SignUpCActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up_c);
         getSupportActionBar().hide();
 
+
+
         Init();
 
         _context = getApplicationContext();
@@ -138,6 +140,8 @@ public class SignUpCActivity extends AppCompatActivity {
 
             String url = Helper.Api_Url + "/api/registration?" + data;
 
+            Log.d("url", url);
+
             // Making a request to url and getting response
             String jsonStr = sh.makeServiceCall(url, "POST", _context);
 
@@ -189,11 +193,16 @@ public class SignUpCActivity extends AppCompatActivity {
                             .show();
                 }
                 else {
+                    Integer StudentUid = jsonObj.getInt("UID");
+
+                    Log.d("StudentUid", StudentUid + "");
+
+                    Helper.Put(SignUpCActivity.this, "UID", StudentUid.toString());
+
                     Intent i = new Intent(getApplicationContext(), DashboardActivity.class);
                     startActivity(i);
                     finish();
                 }
-
 
             } catch (final JSONException e) {
                 Log.e(TAG, "Json parsing error: " + e.getMessage());

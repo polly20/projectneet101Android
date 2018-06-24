@@ -27,13 +27,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Slide1Activity" />
-        <activity android:name=".TargetActivity" >
+        <activity android:name=".Slide1Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".TargetActivity" >
+
         </activity>
         <activity
             android:name=".MainActivity"
@@ -63,7 +65,11 @@
             android:value="@string/facebook_app_id" />
 
         <activity android:name=".MessageBoxOk" />
-        <activity android:name=".DashboardActivity" />
+        <activity android:name=".DashboardActivity" >
+
+        </activity>
+
+
         <activity android:name=".RecommendActivity" />
         <activity android:name=".QuestionDashboardActivity">
 

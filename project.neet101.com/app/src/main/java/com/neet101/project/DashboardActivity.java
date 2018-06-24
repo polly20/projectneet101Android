@@ -30,7 +30,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     public String userId, firstName, lastName, email, imageUrl;
 
-    public Button btnLogout;
+    public Button btnLogout, btnGetStarted;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,10 +61,21 @@ public class DashboardActivity extends AppCompatActivity {
         Email.setText(email);
 
         btnLogout = (Button) findViewById(R.id.btnLogout);
+        btnGetStarted = (Button) findViewById(R.id.btnGetStarted);
+
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 logout();
+            }
+        });
+        btnGetStarted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getBaseContext(), TargetActivity.class);
+                startActivity(i);
+
+                finish();
             }
         });
 
@@ -95,6 +106,7 @@ public class DashboardActivity extends AppCompatActivity {
         }
 
     }
+
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
